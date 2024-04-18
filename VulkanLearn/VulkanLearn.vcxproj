@@ -142,6 +142,20 @@
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+  <!-- <ItemDefinitionGroup>
+  <CustomBuildStep Include="$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe">
+    <Command>%(Identity) $(ProjectDir)\shaders\simple_shader.vert -o $(ProjectDir)\shaders\simple_shader.vert.spv</Command>
+    <Outputs>$(ProjectDir)\shaders\simple_shader.vert.spv</Outputs>
+    <Inputs>$(ProjectDir)\shaders\simple_shader.vert</Inputs>
+  </CustomBuildStep>
+  </ItemDefinitionGroup> -->
+  <!-- <ItemDefinitionGroup>
+  <CustomBuildStep>
+    <Command>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe $(ProjectDir)\shaders\simple_shader.frag -o $(ProjectDir)\shaders\simple_shader.frag.spv</Command>
+    <Outputs></Outputs>
+    <Inputs></Inputs>
+  </CustomBuildStep>
+</ItemDefinitionGroup> -->
   <ItemGroup>
     <None Include="Shaders\simple_shader.frag" />
     <None Include="Shaders\simple_shader.frag.spv" />
