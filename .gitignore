@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Shader folder
-Shaders/
+**/Shaders/
 
 #Shader files
 *.frag
