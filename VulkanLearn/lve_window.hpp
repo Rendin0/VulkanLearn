@@ -10,7 +10,7 @@ namespace lve
 	class LveWindow
 	{
 	public:
-		LveWindow(int width, int length, std::string window_name);
+		LveWindow(int width, int height, std::string window_name);
 		~LveWindow();
 
 		LveWindow(const LveWindow&) = delete;
@@ -18,12 +18,16 @@ namespace lve
 
 		bool shouldClose();
 
+		void createWindowSurface(VkInstance vk_instance, VkSurfaceKHR *vk_surface_khr);
+
+		VkExtent2D getExtend();
+
 	private:
 		GLFWwindow* window;
 		std::string window_name;
 
 		const int width;
-		const int heigth;
+		const int height;
 
 		void initWindow();
 
