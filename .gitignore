@@ -363,7 +363,7 @@ MigrationBackup/
 FodyWeavers.xsd
 
 #Shader folder
-**/Shaders/
+VulkanLearn/Shaders/
 
 #Shader files
 *.frag
