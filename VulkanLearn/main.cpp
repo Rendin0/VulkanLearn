@@ -6,6 +6,7 @@ int main()
 {
 	lve::FirstApp app;
 
+
 	try
 	{
 		app.run();

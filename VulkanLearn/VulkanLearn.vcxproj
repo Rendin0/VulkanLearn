@@ -85,6 +85,18 @@
       <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Message>Pls work im bagging</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)Shaders\simple_shader.frag.spv;$(ProjectDir)Shaders\simple_shader.vert.spv;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>
+      </Inputs>
+      <RootFolder>.\Shaders</RootFolder>
+      <Command>"$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.frag -o shaders\simple_shader.frag.spv &amp;&amp; "$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.vert -o shaders\simple_shader.vert.spv</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -105,6 +117,18 @@
       <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Message>Pls work im bagging</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)Shaders\simple_shader.frag.spv;$(ProjectDir)Shaders\simple_shader.vert.spv;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>
+      </Inputs>
+      <RootFolder>.\Shaders</RootFolder>
+      <Command>"$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.frag -o shaders\simple_shader.frag.spv &amp;&amp; "$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.vert -o shaders\simple_shader.vert.spv</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -121,6 +145,18 @@
       <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Message>Pls work im bagging</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)Shaders\simple_shader.frag.spv;$(ProjectDir)Shaders\simple_shader.vert.spv;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>
+      </Inputs>
+      <RootFolder>.\Shaders</RootFolder>
+      <Command>"$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.frag -o shaders\simple_shader.frag.spv &amp;&amp; "$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.vert -o shaders\simple_shader.vert.spv</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -141,10 +177,34 @@
       <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <CustomBuildStep>
+      <Message>Pls work im bagging</Message>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Outputs>$(ProjectDir)Shaders\simple_shader.frag.spv;$(ProjectDir)Shaders\simple_shader.vert.spv;%(Outputs)</Outputs>
+    </CustomBuildStep>
+    <CustomBuildStep>
+      <Inputs>
+      </Inputs>
+      <RootFolder>.\Shaders</RootFolder>
+      <Command>"$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.frag -o shaders\simple_shader.frag.spv &amp;&amp; "$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe" shaders\simple_shader.vert -o shaders\simple_shader.vert.spv</Command>
+    </CustomBuildStep>
   </ItemDefinitionGroup>
+  <!-- <ItemGroup>
+  <CustomBuild Include="faq.txt">
+    <Message>Copying readme...</Message>
+    <Command>copy %(Identity) $(OutDir)%(Identity)</Command>
+    <Outputs>$(OutDir)%(Identity)</Outputs>
+  </CustomBuild>
+</ItemGroup>
+<PropertyGroup>
+  <CustomBuildAfterTargets>ClCompile</CustomBuildAfterTargets>
+  <CustomBuildBeforeTargets>Link</CustomBuildBeforeTargets>
+</PropertyGroup> -->
   <!-- <ItemDefinitionGroup>
-  <CustomBuildStep Include="$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe">
-    <Command>%(Identity) $(ProjectDir)\shaders\simple_shader.vert -o $(ProjectDir)\shaders\simple_shader.vert.spv</Command>
+  <CustomBuildStep>
+    <Message> Test message </Message>
+    <Command>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Bin\glslc.exe $(ProjectDir)shaders\simple_shader.vert -o $(ProjectDir)shaders\simple_shader.vert.spv</Command>
     <Outputs>$(ProjectDir)\shaders\simple_shader.vert.spv</Outputs>
     <Inputs>$(ProjectDir)\shaders\simple_shader.vert</Inputs>
   </CustomBuildStep>
