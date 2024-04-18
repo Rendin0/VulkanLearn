@@ -4,6 +4,9 @@
 
 int main()
 {
+	system("compile.bat");
+
+
 	lve::FirstApp app;
 
 	try
