@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "lve_device.hpp"
+#include "lve_model.hpp"
 
 namespace lve
 {
