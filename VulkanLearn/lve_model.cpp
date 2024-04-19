@@ -73,31 +73,41 @@ namespace lve
 
 	std::vector<LveModel::Vertex> LveModel::Vertex::makeSerpinskiStep(const std::vector<Vertex>& vertices)
 	{
-		std::vector<LveModel::Vertex> new_vertices;
 
 		if (vertices.size() == 3)
 		{
-			LveModel::Vertex point1{ {vertices[1].position.x / 2, vertices[0].position.y + vertices[1].position.y} };
-			LveModel::Vertex point2{ {vertices[1].position.x + vertices[2].position.x, vertices[1].position.y} };
-			LveModel::Vertex point3{ {vertices[2].position.x / 2, vertices[2].position.y + vertices[0].position.y} };
+			std::vector<LveModel::Vertex> new_vertices(3);
+			Vertex new_points[3];
+
+			for (int i = 0; i < 3; i++)
+			{
+				new_points[i] =
+				{
+					{(vertices[i].position.x + vertices[(i + 1) % 3].position.x) / 2,
+					(vertices[i].position.y + vertices[(i + 1) % 3].position.y) / 2}
+				};
+			}
 
 			new_vertices.resize(9);
 
 			new_vertices[0] = vertices[0];
-			new_vertices[1] = point1;
-			new_vertices[2] = point3;
+			new_vertices[1] = new_points[0];
+			new_vertices[2] = new_points[2];
 
-			new_vertices[3] = point1;
+			new_vertices[3] = new_points[0];
 			new_vertices[4] = vertices[1];
-			new_vertices[5] = point2;
+			new_vertices[5] = new_points[1];
 
-			new_vertices[6] = point3;
-			new_vertices[7] = point2;
+			new_vertices[6] = new_points[2];
+			new_vertices[7] = new_points[1];
 			new_vertices[8] = vertices[2];
+			return new_vertices;
 		}
 		else
 		{
-			new_vertices.resize(pow(3, (log(vertices.size()) / log(3) + 1)));
+			std::vector<LveModel::Vertex> new_vertices;
+			new_vertices.resize(pow(3, (log2(vertices.size()) / log2(3) + 1)));
+
 
 			for (size_t i = 0; i < vertices.size(); i += 3)
 			{
@@ -109,9 +119,9 @@ namespace lve
 				}
 			}
 			std::cout << "\n{Vector size =" << new_vertices.size() << "}\n";
+			return new_vertices;
 		}
 
-		return new_vertices;
 	}
 
 

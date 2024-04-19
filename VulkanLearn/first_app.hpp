@@ -36,6 +36,7 @@ namespace lve
 		LveWindow lve_window{ WIDTH, HEIGHT, "World!" };
 		LveDevice lve_device{ lve_window };
 		LveSwapChain lve_swap_chain{ lve_device, lve_window.getExtend() };
+		std::vector<LveModel::Vertex> vertices;
 
 		std::unique_ptr<LvePipeline> lve_pipeline;
 		std::unique_ptr<LveModel> lve_model;
