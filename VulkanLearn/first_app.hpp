@@ -24,10 +24,12 @@ namespace lve
 		FirstApp(const FirstApp&) = delete;
 		FirstApp& operator=(const FirstApp&) = delete;
 	private:
+		void reloadModels(const std::vector<LveModel::Vertex>& vertices);
 		void loadModels();
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
+		void reloadCommandBuffers();
 		void drawFrame();
 
 

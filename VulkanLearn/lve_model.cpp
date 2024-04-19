@@ -1,6 +1,8 @@
 #include "lve_model.hpp"
 
 #include <cassert>
+#include <iostream>
+#include <cmath>
 
 namespace lve
 {
@@ -67,6 +69,49 @@ namespace lve
 		attribute_descriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
 		attribute_descriptions[0].offset = 0;
 		return attribute_descriptions;
+	}
+
+	std::vector<LveModel::Vertex> LveModel::Vertex::makeSerpinskiStep(const std::vector<Vertex>& vertices)
+	{
+		std::vector<LveModel::Vertex> new_vertices;
+
+		if (vertices.size() == 3)
+		{
+			LveModel::Vertex point1{ {vertices[1].position.x / 2, vertices[0].position.y + vertices[1].position.y} };
+			LveModel::Vertex point2{ {vertices[1].position.x + vertices[2].position.x, vertices[1].position.y} };
+			LveModel::Vertex point3{ {vertices[2].position.x / 2, vertices[2].position.y + vertices[0].position.y} };
+
+			new_vertices.resize(9);
+
+			new_vertices[0] = vertices[0];
+			new_vertices[1] = point1;
+			new_vertices[2] = point3;
+
+			new_vertices[3] = point1;
+			new_vertices[4] = vertices[1];
+			new_vertices[5] = point2;
+
+			new_vertices[6] = point3;
+			new_vertices[7] = point2;
+			new_vertices[8] = vertices[2];
+		}
+		else
+		{
+			new_vertices.resize(pow(3, (log(vertices.size()) / log(3) + 1)));
+
+			for (size_t i = 0; i < vertices.size(); i += 3)
+			{
+				std::vector<Vertex>tmp_vertices = makeSerpinskiStep({ vertices[i], vertices[i + 1], vertices[i + 2] });
+
+				for (size_t j = 0; j < tmp_vertices.size(); j++)
+				{
+					new_vertices[(i * 3) + j] = tmp_vertices[j];
+				}
+			}
+			std::cout << "\n{Vector size =" << new_vertices.size() << "}\n";
+		}
+
+		return new_vertices;
 	}
 
 

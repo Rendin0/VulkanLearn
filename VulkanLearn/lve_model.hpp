@@ -18,6 +18,7 @@ namespace lve
 			static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
 			static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
 
+			static std::vector<Vertex> makeSerpinskiStep(const std::vector<Vertex>& vertices);
 		};
 
 		LveModel(LveDevice& lve_device, const std::vector<Vertex>& vertices);
@@ -25,6 +26,7 @@ namespace lve
 
 		LveModel(const LveModel&) = delete;
 		LveModel& operator=(const LveModel&) = delete;
+		//LveModel& operator=(const std::vector<LveModel::Vertex>& vertices);
 
 		void bind(VkCommandBuffer buffer);
 		void draw(VkCommandBuffer buffer);

@@ -6,10 +6,22 @@ namespace lve
 {
 	void FirstApp::run()
 	{
+		std::vector<LveModel::Vertex> vertices
+		{
+			{{0.0f, -0.5f}},
+			{{0.5f, 0.5f}},
+			{{-0.5f, 0.5f}}
+		};
+
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
 			drawFrame();
+
+			system("pause");
+			vertices = LveModel::Vertex::makeSerpinskiStep(vertices);
+			reloadModels(vertices);
+			createCommandBuffers();
 		}
 	}
 	FirstApp::FirstApp()
@@ -18,11 +30,14 @@ namespace lve
 		createPipelineLayout();
 		createPipeline();
 		createCommandBuffers();
-
 	}
 	FirstApp::~FirstApp()
 	{
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
+	}
+	void FirstApp::reloadModels(const std::vector<LveModel::Vertex>& vertices)
+	{
+		lve_model.reset(new LveModel(lve_device, vertices));
 	}
 	void FirstApp::loadModels()
 	{
