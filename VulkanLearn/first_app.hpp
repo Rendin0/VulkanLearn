@@ -16,7 +16,6 @@ namespace lve
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 800;
 
-		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
 
 		void run();
 
@@ -26,6 +25,8 @@ namespace lve
 		FirstApp(const FirstApp&) = delete;
 		FirstApp& operator=(const FirstApp&) = delete;
 	private:
+		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 		void reloadModels(const std::vector<LveModel::Vertex>& vertices);
 		void loadModels();
 		void createPipelineLayout();

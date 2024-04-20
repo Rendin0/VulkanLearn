@@ -36,7 +36,6 @@ namespace lve
 		{
 			glfwPollEvents();
 			drawFrame();
-
 		}
 	}
 	FirstApp::FirstApp()
