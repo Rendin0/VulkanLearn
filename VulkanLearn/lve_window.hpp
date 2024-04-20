@@ -17,12 +17,15 @@ namespace lve
 		LveWindow& operator=(const LveWindow&) = delete;
 
 		bool shouldClose();
+		void setKeyCallback(const GLFWkeyfun& keyProcess);
+		void setWindowUserPointer(void* ptr);
 
 		void createWindowSurface(VkInstance vk_instance, VkSurfaceKHR *vk_surface_khr);
 
 		VkExtent2D getExtend();
 
 	private:
+
 		GLFWwindow* window;
 		std::string window_name;
 

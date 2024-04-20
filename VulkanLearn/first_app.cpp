@@ -2,25 +2,41 @@
 #include <stdexcept>
 #include <array>
 #include <conio.h>
+#include <iostream>
 
 namespace lve
 {
+	void FirstApp::keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods)
+	{
+		FirstApp* app = static_cast<FirstApp*>(glfwGetWindowUserPointer(window));
+
+		if (action == GLFW_PRESS)
+		{
+			switch (key)
+			{
+			case GLFW_KEY_ENTER:
+				app->vertices = LveModel::Vertex::makeSerpinskiStep(app->vertices);
+				app->reloadModels(app->vertices);
+				app->createCommandBuffers();
+				break;
+			case GLFW_KEY_ESCAPE: // Todo: Closing window by key
+				//app->lve_window.windowShoulsClose();
+				break;
+			default:
+				break;
+			}
+		}
+	}
 	void FirstApp::run()
 	{
+		lve_window.setWindowUserPointer(this);
+		lve_window.setKeyCallback(keyProcess);
+
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
 			drawFrame();
 
-			if (_kbhit())
-			{
-				if (_getch() == 13)
-				{
-					vertices = LveModel::Vertex::makeSerpinskiStep(vertices);
-					reloadModels(vertices);
-					createCommandBuffers();
-				}
-			}
 		}
 	}
 	FirstApp::FirstApp()
@@ -40,11 +56,11 @@ namespace lve
 	}
 	void FirstApp::loadModels()
 	{
-		vertices = 
+		vertices =
 		{
-			{{0.0f, -0.5f}},
-			{{0.5f, 0.5f}},
-			{{-0.5f, 0.5f}}
+			{{0.0f, -0.95f}},
+			{{0.95f, 0.95f}},
+			{{-0.95f, 0.95f}}
 		};
 
 		lve_model = std::make_unique<LveModel>(lve_device, vertices);

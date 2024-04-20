@@ -19,6 +19,16 @@ namespace lve
 		return glfwWindowShouldClose(window);
 	}
 
+	void LveWindow::setKeyCallback(const GLFWkeyfun& keyProcess)
+	{
+		glfwSetKeyCallback(window, keyProcess);
+	}
+
+	void LveWindow::setWindowUserPointer(void* ptr)
+	{
+		glfwSetWindowUserPointer(window, ptr);
+	}
+
 	void LveWindow::createWindowSurface(VkInstance vk_instance, VkSurfaceKHR* vk_surface_khr)
 	{
 		if (glfwCreateWindowSurface(vk_instance, window, nullptr, vk_surface_khr) != VK_SUCCESS)

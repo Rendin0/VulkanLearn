@@ -16,6 +16,8 @@ namespace lve
 		static constexpr int WIDTH = 800;
 		static constexpr int HEIGHT = 800;
 
+		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
+
 		void run();
 
 		FirstApp();
