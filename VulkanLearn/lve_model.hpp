@@ -26,7 +26,6 @@ namespace lve
 
 		LveModel(const LveModel&) = delete;
 		LveModel& operator=(const LveModel&) = delete;
-		//LveModel& operator=(const std::vector<LveModel::Vertex>& vertices);
 
 		void bind(VkCommandBuffer buffer);
 		void draw(VkCommandBuffer buffer);

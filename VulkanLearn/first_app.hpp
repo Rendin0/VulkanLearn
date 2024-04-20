@@ -32,7 +32,7 @@ namespace lve
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
-		void reloadCommandBuffers();
+		void reloadCommandBuffers(); // Todo
 		void drawFrame();
 
 

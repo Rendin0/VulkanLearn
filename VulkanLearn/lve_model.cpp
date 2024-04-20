@@ -8,10 +8,10 @@ namespace lve
 {
 	LveModel::LveModel(LveDevice& lve_device, const std::vector<Vertex>& vertices)
 		: lve_device(lve_device)
-
 	{
 		createVertexBuffer(vertices);
 	}
+
 
 	LveModel::~LveModel()
 	{
@@ -73,7 +73,6 @@ namespace lve
 
 	std::vector<LveModel::Vertex> LveModel::Vertex::makeSerpinskiStep(const std::vector<Vertex>& vertices)
 	{
-
 		if (vertices.size() == 3)
 		{
 			std::vector<LveModel::Vertex> new_vertices(3);
@@ -106,7 +105,7 @@ namespace lve
 		else
 		{
 			std::vector<LveModel::Vertex> new_vertices;
-			new_vertices.resize(pow(3, (log2(vertices.size()) / log2(3) + 1)));
+			new_vertices.resize(static_cast<size_t>(pow(3, (log2(vertices.size()) / log2(3) + 1))));
 
 
 			for (size_t i = 0; i < vertices.size(); i += 3)
