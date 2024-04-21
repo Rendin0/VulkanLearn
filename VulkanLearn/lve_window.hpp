@@ -20,17 +20,21 @@ namespace lve
 		void setKeyCallback(const GLFWkeyfun& keyProcess);
 		void setWindowUserPointer(void* ptr);
 
+		bool wasWindowResized();
+		void resetWindowResizedFlag();
+
 		void createWindowSurface(VkInstance vk_instance, VkSurfaceKHR *vk_surface_khr);
 
 		VkExtent2D getExtend();
 
 	private:
-
+		static void framebufferResizedCallback(GLFWwindow *window, int width, int height);
 		GLFWwindow* window;
 		std::string window_name;
 
-		const int width;
-		const int height;
+		int width;
+		int height;
+		bool window_resized = false;
 
 		void initWindow();
 

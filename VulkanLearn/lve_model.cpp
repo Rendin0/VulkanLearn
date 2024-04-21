@@ -34,6 +34,7 @@ namespace lve
 
 		void* data;
 
+
 		vkMapMemory(lve_device.device(), vertex_buffer_memory, 0, buffer_size, 0, &data);
 		memcpy(data, vertices.data(), static_cast<size_t>(buffer_size));
 		vkUnmapMemory(lve_device.device(), vertex_buffer_memory);
@@ -63,11 +64,16 @@ namespace lve
 
 	std::vector<VkVertexInputAttributeDescription> LveModel::Vertex::getAttributeDescriptions()
 	{
-		std::vector<VkVertexInputAttributeDescription> attribute_descriptions(1);
+		std::vector<VkVertexInputAttributeDescription> attribute_descriptions(2);
 		attribute_descriptions[0].binding = 0;
 		attribute_descriptions[0].location = 0;
 		attribute_descriptions[0].format = VK_FORMAT_R32G32_SFLOAT;
-		attribute_descriptions[0].offset = 0;
+		attribute_descriptions[0].offset = offsetof(Vertex, position);
+
+		attribute_descriptions[1].binding = 0;
+		attribute_descriptions[1].location = 1;
+		attribute_descriptions[1].format = VK_FORMAT_R32G32B32_SFLOAT;
+		attribute_descriptions[1].offset = offsetof(Vertex, color);
 		return attribute_descriptions;
 	}
 
@@ -83,7 +89,11 @@ namespace lve
 				new_points[i] =
 				{
 					{(vertices[i].position.x + vertices[(i + 1) % 3].position.x) / 2,
-					(vertices[i].position.y + vertices[(i + 1) % 3].position.y) / 2}
+					(vertices[i].position.y + vertices[(i + 1) % 3].position.y) / 2},
+
+					{(vertices[i].color.x / 2) + (vertices[(i + 1) % 3].color.x / 2),
+					(vertices[i].color.y / 2) + (vertices[(i + 1) % 3].color.y / 2),
+					(vertices[i].color.z / 2) + (vertices[(i + 1) % 3].color.z / 2)}
 				};
 			}
 

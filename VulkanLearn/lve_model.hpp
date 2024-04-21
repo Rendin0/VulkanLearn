@@ -14,6 +14,7 @@ namespace lve
 
 		struct Vertex {
 			glm::vec2 position;
+			glm::vec3 color;
 
 			static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
 			static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
@@ -27,6 +28,7 @@ namespace lve
 		LveModel(const LveModel&) = delete;
 		LveModel& operator=(const LveModel&) = delete;
 
+		void reloadVertices();
 		void bind(VkCommandBuffer buffer);
 		void draw(VkCommandBuffer buffer);
 

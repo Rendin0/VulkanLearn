@@ -18,6 +18,7 @@ namespace lve
 
 
 		void run();
+		LveWindow* lveWindow();
 
 		FirstApp();
 		~FirstApp();
@@ -29,6 +30,8 @@ namespace lve
 
 		void reloadModels(const std::vector<LveModel::Vertex>& vertices);
 		void loadModels();
+		void recreateSwapChain();
+		void recordCommandBuffer(int image_index);
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
@@ -38,7 +41,7 @@ namespace lve
 
 		LveWindow lve_window{ WIDTH, HEIGHT, "World!" };
 		LveDevice lve_device{ lve_window };
-		LveSwapChain lve_swap_chain{ lve_device, lve_window.getExtend() };
+		std::unique_ptr<LveSwapChain> lve_swap_chain;
 		std::vector<LveModel::Vertex> vertices;
 
 		std::unique_ptr<LvePipeline> lve_pipeline;

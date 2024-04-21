@@ -29,6 +29,16 @@ namespace lve
 		glfwSetWindowUserPointer(window, ptr);
 	}
 
+	bool LveWindow::wasWindowResized()
+	{
+		return window_resized;
+	}
+
+	void LveWindow::resetWindowResizedFlag()
+	{
+		window_resized = false;
+	}
+
 	void LveWindow::createWindowSurface(VkInstance vk_instance, VkSurfaceKHR* vk_surface_khr)
 	{
 		if (glfwCreateWindowSurface(vk_instance, window, nullptr, vk_surface_khr) != VK_SUCCESS)
@@ -42,12 +52,23 @@ namespace lve
 		return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
 	}
 
+	void LveWindow::framebufferResizedCallback(GLFWwindow* window, int width, int height)
+	{
+		auto lve_window = reinterpret_cast<LveWindow*>(glfwGetWindowUserPointer(window));
+
+		lve_window->window_resized = true;
+		lve_window->width = width;
+		lve_window->height = height;
+	}
+
 	void LveWindow::initWindow()
 	{
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
-		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 		window = glfwCreateWindow(width, height, window_name.c_str(), nullptr, nullptr);
+		setWindowUserPointer(this);
+		glfwSetFramebufferSizeCallback(window, framebufferResizedCallback);
 	}
 }
