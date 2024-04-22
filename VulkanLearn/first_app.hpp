@@ -37,6 +37,7 @@ namespace lve
 		void createCommandBuffers();
 		void reloadCommandBuffers(); // Todo
 		void drawFrame();
+		static void drawing(FirstApp* this_app);
 
 
 		LveWindow lve_window{ WIDTH, HEIGHT, "World!" };
