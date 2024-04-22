@@ -56,9 +56,10 @@ namespace lve
 	{
 		vertices =
 		{
-			{{0.0f, -0.95f}, {1.0f, 0.0f, 0.0f}},
-			{{0.95f, 0.95f}, {0.0f, 1.0f, 0.0f}},
-			{{-0.95f, 0.95f}, {0.0f, 0.0f, 1.0f}}
+			{{0.0f, -0.5f}, {1.0f, 0.0f, 0.0f}},
+			{{0.5f, 0.5f}, {0.f, 0.7f, 0.3f}},
+			{{-0.5f, 0.5f}, {0.0f, 0.0f, 1.0f}},
+			{{0.75f, 1.0f}, {0.0f, 0.0f, 1.0f}}
 		};
 
 		lve_model = std::make_unique<LveModel>(lve_device, vertices);

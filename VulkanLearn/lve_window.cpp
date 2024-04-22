@@ -43,8 +43,6 @@ namespace lve
 	{
 		if (glfwCreateWindowSurface(vk_instance, window, nullptr, vk_surface_khr) != VK_SUCCESS)
 			throw std::runtime_error("Surface not success");
-
-
 	}
 
 	VkExtent2D LveWindow::getExtend()
@@ -68,7 +66,7 @@ namespace lve
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
 
 		window = glfwCreateWindow(width, height, window_name.c_str(), nullptr, nullptr);
-		setWindowUserPointer(this);
+		//setWindowUserPointer(this); //-- Is this required? Already setting windwo user point in first_app.cpp
 		glfwSetFramebufferSizeCallback(window, framebufferResizedCallback);
 	}
 }
