@@ -19,26 +19,19 @@ namespace lve
 		vkDestroyPipeline(lve_device.device(), graphics_pipeline, nullptr);
 	}
 
-	PipelineConfigInfo LvePipeline::defaultPipelineConfigInfo(uint32_t width, uint32_t height)
+	void LvePipeline::defaultPipelineConfigInfo(PipelineConfigInfo& info)
 	{
-		PipelineConfigInfo info{};
-
 		info.inputAssemblyInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_INPUT_ASSEMBLY_STATE_CREATE_INFO;
 		info.inputAssemblyInfo.topology = VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
 		info.inputAssemblyInfo.primitiveRestartEnable = VK_FALSE;
 		info.inputAssemblyInfo.pNext = nullptr;
 
-		info.viewport.x = 0.0f;
-		info.viewport.y = 0.0f;
-		info.viewport.width = static_cast<float>(width);
-		info.viewport.height = static_cast<float>(height);
-		info.viewport.minDepth = 0.0f;
-		info.viewport.maxDepth = 1.0f;
-
-		info.scissor.offset = { 0, 0 };
-		info.scissor.extent = { width, height };
-
-		
+		info.viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
+		info.viewportInfo.viewportCount = 1;
+		info.viewportInfo.pViewports = nullptr;
+		info.viewportInfo.scissorCount = 1;
+		info.viewportInfo.pScissors = nullptr;
+		info.viewportInfo.pNext = nullptr;
 
 		info.rasterizationInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_RASTERIZATION_STATE_CREATE_INFO;
 		info.rasterizationInfo.depthClampEnable = VK_FALSE;
@@ -83,7 +76,11 @@ namespace lve
 		info.depthStencilInfo.front = {};  // Optional
 		info.depthStencilInfo.back = {};   // Optional
 
-		return info;
+		info.dynamicStateEnables = { VK_DYNAMIC_STATE_VIEWPORT, VK_DYNAMIC_STATE_SCISSOR };
+		info.dynamicStateInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_DYNAMIC_STATE_CREATE_INFO;
+		info.dynamicStateInfo.pDynamicStates = info.dynamicStateEnables.data();
+		info.dynamicStateInfo.dynamicStateCount = static_cast<uint32_t>(info.dynamicStateEnables.size());
+		info.dynamicStateInfo.flags = 0;
 	}
 
 	void LvePipeline::bind(VkCommandBuffer command_buffer)
@@ -147,14 +144,6 @@ namespace lve
 		vertex_input_info.pVertexAttributeDescriptions = attribute_descriptions.data();
 		vertex_input_info.pVertexBindingDescriptions = binding_descriptions.data();
 
-		VkPipelineViewportStateCreateInfo viewportInfo{};
-		viewportInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_VIEWPORT_STATE_CREATE_INFO;
-		viewportInfo.viewportCount = 1;
-		viewportInfo.pViewports = &config.viewport;
-		viewportInfo.scissorCount = 1;
-		viewportInfo.pScissors = &config.scissor;
-		viewportInfo.pNext = nullptr;
-
 		VkPipelineColorBlendStateCreateInfo colorBlendInfo{};
 		colorBlendInfo.sType = VK_STRUCTURE_TYPE_PIPELINE_COLOR_BLEND_STATE_CREATE_INFO;
 		colorBlendInfo.logicOpEnable = VK_FALSE;
@@ -177,8 +166,8 @@ namespace lve
 		pipeline_info.pDepthStencilState = &config.depthStencilInfo;
 		pipeline_info.pMultisampleState = &config.multisampleInfo;
 		pipeline_info.pRasterizationState = &config.rasterizationInfo;
-		pipeline_info.pViewportState = &viewportInfo;
-		pipeline_info.pDynamicState = nullptr;
+		pipeline_info.pViewportState = &config.viewportInfo;
+		pipeline_info.pDynamicState = &config.dynamicStateInfo;
 
 		pipeline_info.layout = config.pipelineLayout;
 		pipeline_info.renderPass = config.renderPass;

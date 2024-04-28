@@ -8,6 +8,10 @@
 #include <memory>
 #include <vector>
 
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
+#include <GLM/glm.hpp>
+
 namespace lve
 {
 	class FirstApp
@@ -35,6 +39,7 @@ namespace lve
 		void createPipelineLayout();
 		void createPipeline();
 		void createCommandBuffers();
+		void freeCommandBuffers();
 		void reloadCommandBuffers(); // Todo
 		void drawFrame();
 

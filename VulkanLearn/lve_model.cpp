@@ -88,12 +88,15 @@ namespace lve
 			{
 				new_points[i] =
 				{
-					{(vertices[i].position.x + vertices[(i + 1) % 3].position.x) / 2,
-					(vertices[i].position.y + vertices[(i + 1) % 3].position.y) / 2},
-
-					{(vertices[i].color.x / 2) + (vertices[(i + 1) % 3].color.x / 2),
-					(vertices[i].color.y / 2) + (vertices[(i + 1) % 3].color.y / 2),
-					(vertices[i].color.z / 2) + (vertices[(i + 1) % 3].color.z / 2)}
+					{
+						(vertices[i].position.x + vertices[(i + 1) % 3].position.x) / 2,
+						(vertices[i].position.y + vertices[(i + 1) % 3].position.y) / 2
+					},
+					{
+						(vertices[i].color.x / 2) + (vertices[(i + 1) % 3].color.x / 2),
+						(vertices[i].color.y / 2) + (vertices[(i + 1) % 3].color.y / 2),
+						(vertices[i].color.z / 2) + (vertices[(i + 1) % 3].color.z / 2)
+					}
 				};
 			}
 

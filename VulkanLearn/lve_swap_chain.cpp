@@ -13,12 +13,15 @@ namespace lve {
 
 LveSwapChain::LveSwapChain(LveDevice &deviceRef, VkExtent2D extent)
     : device{deviceRef}, windowExtent{extent} {
-  createSwapChain();
-  createImageViews();
-  createRenderPass();
-  createDepthResources();
-  createFramebuffers();
-  createSyncObjects();
+    init();
+}
+
+LveSwapChain::LveSwapChain(LveDevice& deviceRef, VkExtent2D windowExtent, std::shared_ptr<LveSwapChain> previous_swap_chain)
+    :device(deviceRef), old_swap_chain(previous_swap_chain)
+{
+    init();
+
+    old_swap_chain = nullptr;
 }
 
 LveSwapChain::~LveSwapChain() {
@@ -119,6 +122,16 @@ VkResult LveSwapChain::submitCommandBuffers(
   return result;
 }
 
+void LveSwapChain::init()
+{
+    createSwapChain();
+    createImageViews();
+    createRenderPass();
+    createDepthResources();
+    createFramebuffers();
+    createSyncObjects();
+}
+
 void LveSwapChain::createSwapChain() {
   SwapChainSupportDetails swapChainSupport = device.getSwapChainSupport();
 
@@ -162,7 +175,7 @@ void LveSwapChain::createSwapChain() {
   createInfo.presentMode = presentMode;
   createInfo.clipped = VK_TRUE;
 
-  createInfo.oldSwapchain = VK_NULL_HANDLE;
+  createInfo.oldSwapchain = old_swap_chain == nullptr ? VK_NULL_HANDLE : old_swap_chain->swapChain;
 
   if (vkCreateSwapchainKHR(device.device(), &createInfo, nullptr, &swapChain) != VK_SUCCESS) {
     throw std::runtime_error("failed to create swap chain!");
@@ -380,12 +393,12 @@ VkPresentModeKHR LveSwapChain::chooseSwapPresentMode(
     }
   }
 
-  // for (const auto &availablePresentMode : availablePresentModes) {
-  //   if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
-  //     std::cout << "Present mode: Immediate" << std::endl;
-  //     return availablePresentMode;
-  //   }
-  // }
+ /*  for (const auto &availablePresentMode : availablePresentModes) {
+     if (availablePresentMode == VK_PRESENT_MODE_IMMEDIATE_KHR) {
+       std::cout << "Present mode: Immediate" << std::endl;
+       return availablePresentMode;
+     }
+   }*/
 
   std::cout << "Present mode: V-Sync" << std::endl;
   return VK_PRESENT_MODE_FIFO_KHR;
