@@ -77,12 +77,12 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Include;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\include;$(CurrentVsInstallRoot)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(APPDATA)\MyLibs\Vulkan\Include;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\include;$(APPDATA)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(APPDATA)\MyLibs\Vulkan\Lib;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
@@ -106,14 +106,14 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Include;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\include;$(CurrentVsInstallRoot)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(APPDATA)\MyLibs\Vulkan\Include;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\include;$(APPDATA)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(APPDATA)\MyLibs\Vulkan\Lib;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
@@ -135,12 +135,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Include;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\include;$(CurrentVsInstallRoot)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(APPDATA)\MyLibs\Vulkan\Include;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\include;$(APPDATA)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(APPDATA)\MyLibs\Vulkan\Lib;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
@@ -164,14 +164,14 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Include;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\include;$(CurrentVsInstallRoot)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(APPDATA)\MyLibs\Vulkan\Include;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\include;$(APPDATA)\MyLibs\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(CurrentVsInstallRoot)\MyLibs\Vulkan\Lib;$(CurrentVsInstallRoot)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(APPDATA)\MyLibs\Vulkan\Lib;$(APPDATA)\MyLibs\glfw-3.4.bin.WIN64\lib-vc2022;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>vulkan-1.lib;glfw3.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <CustomBuildStep>
