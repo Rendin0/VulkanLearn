@@ -3,6 +3,7 @@
 #include <array>
 #include <conio.h>
 #include <iostream>
+#include <thread>
 
 namespace lve
 {
@@ -37,12 +38,22 @@ namespace lve
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
 
+		std::thread drawin(drawing, this);
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
-			drawFrame();
+		}
+		drawin.join();
+	}
+
+	void FirstApp::drawing(FirstApp* this_app)
+	{
+		while (!this_app->lve_window.shouldClose())
+		{
+			this_app->drawFrame();
 		}
 	}
+
 	FirstApp::FirstApp()
 	{
 		loadModels();
