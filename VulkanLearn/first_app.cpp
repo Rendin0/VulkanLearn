@@ -4,11 +4,13 @@
 #include <conio.h>
 #include <iostream>
 #include <thread>
+#include <ctime>
 
 namespace lve
 {
 	struct SimplePushConstantData
 	{
+		glm::mat2 transform{ 1.f };
 		glm::vec2 offset;
 		alignas(16) glm::vec3 color;
 	};
@@ -22,11 +24,14 @@ namespace lve
 			switch (key)
 			{
 			case GLFW_KEY_ENTER:
-				app->vertices = LveModel::Vertex::makeSerpinskiStep(app->vertices);
-				app->reloadModels(app->vertices);
+				//app->vertices = LveModel::Vertex::makeSerpinskiStep(app->vertices);
+				//app->reloadModels(app->vertices);
 				break;
 			case GLFW_KEY_ESCAPE: // Todo: Closing window by key
 				//app->lve_window.windowShouldClose();
+				break;
+			case GLFW_KEY_RIGHT:
+				app->drawFrame();
 				break;
 			default:
 				break;
@@ -38,12 +43,13 @@ namespace lve
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
 
-		std::thread drawin(drawing, this);
+		drawFrame();
+		//std::thread drawin(drawing, this);
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
 		}
-		drawin.join();
+		//drawin.join();
 	}
 
 	void FirstApp::drawing(FirstApp* this_app)
@@ -54,9 +60,35 @@ namespace lve
 		}
 	}
 
+	void FirstApp::renderGameObjects(VkCommandBuffer command_buffer)
+	{
+		int i = 0;
+		for (auto& obj : game_objects) {
+			i += 1;
+			//obj.transform_2d.rotation = glm::mod<float>(obj.transform_2d.rotation + 0.00001f * i, 2.f * glm::pi<float>());
+		}
+
+		lve_pipeline->bind(command_buffer);
+
+		for (auto& obj : game_objects)
+		{
+			//obj.transform_2d.rotation = glm::mod(obj.transform_2d.rotation + .001f, glm::two_pi<float>());
+
+			SimplePushConstantData push{};
+			push.offset = obj.transform_2d.translation;
+			push.color = obj.color;
+			push.transform = obj.transform_2d.mat2();
+
+
+			vkCmdPushConstants(command_buffer, pipeline_layout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
+			obj.model->bind(command_buffer);
+			obj.model->draw(command_buffer);
+		}
+	}
+
 	FirstApp::FirstApp()
 	{
-		loadModels();
+		loadGameObjects();
 		createPipelineLayout();
 		recreateSwapChain();
 		createCommandBuffers();
@@ -65,13 +97,13 @@ namespace lve
 	{
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
-	void FirstApp::reloadModels(const std::vector<LveModel::Vertex>& vertices)
+	/*void FirstApp::reloadModels(const std::vector<LveModel::Vertex>& vertices)
 	{
 		freeCommandBuffers();
 		createCommandBuffers();
 		lve_model.reset(new LveModel(lve_device, vertices));
-	}
-	void FirstApp::loadModels()
+	}*/
+	void FirstApp::loadGameObjects()
 	{
 		vertices =
 		{
@@ -80,7 +112,39 @@ namespace lve
 			{{-0.5f, 0.5f}, {0.0f, 0.5f, 0.5f}}
 		};
 
-		lve_model = std::make_unique<LveModel>(lve_device, vertices);
+		auto lve_model = std::make_shared<LveModel>(lve_device, vertices);
+
+
+		std::vector<glm::vec3> colors =
+		{
+			{1.f, .7f, .73f},
+			{1.f, .87f, .73f},
+			{1.f, 1.f, .73f},
+			{.73f, 1.f, .8f},
+			{.73, .88f, 1.f}
+		};
+
+		std::vector<glm::vec2> translations =
+		{
+			{{0.f}, {-1.f}},
+			{{1.f}, {1.f}},
+			{{-1.f}, {1.f}}
+		};
+
+		for (int i = 0; i < 3; i++)
+		{
+			auto triangle = LveGameObject::createGameObject();
+			triangle.model = lve_model;
+			triangle.color = { colors[i % colors.size()] };
+			triangle.transform_2d.translation.x = translations[i % translations.size()].x * 0.25f;
+			triangle.transform_2d.translation.y = translations[i % translations.size()].y * 0.25f;
+			triangle.transform_2d.scale *= glm::vec2(.5f);
+			//triangle.transform_2d.rotation = i * glm::pi<float>() * .025f;
+
+			game_objects.push_back(std::move(triangle));
+		}
+
+
 	}
 	void FirstApp::recreateSwapChain()
 	{
@@ -110,10 +174,6 @@ namespace lve
 	}
 	void FirstApp::recordCommandBuffer(int image_index)
 	{
-		static int frame = 0;
-		frame = (frame + 1) % 5000;
-
-
 		VkCommandBufferBeginInfo begin_info{};
 		begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
 
@@ -151,18 +211,7 @@ namespace lve
 		vkCmdSetViewport(command_buffers[image_index], 0, 1, &viewport);
 		vkCmdSetScissor(command_buffers[image_index], 0, 1, &scissor);
 
-		lve_pipeline->bind(command_buffers[image_index]);
-		lve_model->bind(command_buffers[image_index]);
-
-		for (int j = 0; j < 4; j++)
-		{
-			SimplePushConstantData push{};
-			push.offset = { -0.5f + frame * 0.0002f, -0.4f + j * 0.25 };
-			push.color = { 0.0f, 0.0f, 0.2f + 0.2f * j };
-
-			vkCmdPushConstants(command_buffers[image_index], pipeline_layout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
-			lve_model->draw(command_buffers[image_index]);
-		}
+		renderGameObjects(command_buffers[image_index]);
 
 
 		vkCmdEndRenderPass(command_buffers[image_index]);
