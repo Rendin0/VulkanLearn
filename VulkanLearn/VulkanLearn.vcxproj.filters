@@ -16,6 +16,30 @@
     <Filter Include="Resource Files\Shaders">
       <UniqueIdentifier>{dd3accb1-1ea0-40fe-99e5-951e6b1f6e1b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Render Systems">
+      <UniqueIdentifier>{2a2f638b-ed38-46ba-8f4d-295745c24baa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Render Systems">
+      <UniqueIdentifier>{6cc519d7-dab1-4d54-857d-b87aae4b8b9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Renderer">
+      <UniqueIdentifier>{efbef509-ee33-4afb-a313-f8a20463c7c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\App">
+      <UniqueIdentifier>{031e0f31-556e-4e56-9e5d-c3aad0bbca91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{d59ca12b-6caf-4fff-86f9-28c118d93a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Objects">
+      <UniqueIdentifier>{a2d25091-c61c-4422-822a-81d4ac3ec12f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\App">
+      <UniqueIdentifier>{ef2b4c19-c3b9-48ff-b60a-334e16f137d9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Renderer">
+      <UniqueIdentifier>{b7353fab-7efb-41a5-b96f-aee891803a60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\simple_shader.frag">
@@ -32,82 +56,88 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="lve_window.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_device.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="first_app.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_pipeline.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_swap_chain.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_model.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_game_object.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="lve_renderer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="simple_render_system.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="color_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
     <ClCompile Include="dvd_render_system.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Render Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="follow_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
     <ClCompile Include="scale_render_system.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
-    <ClCompile Include="color_render_system.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="simple_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_renderer.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_swap_chain.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_pipeline.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_device.cpp">
+      <Filter>Source Files\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_window.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="first_app.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_game_object.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_model.cpp">
+      <Filter>Source Files\Objects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="lve_window.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_device.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="first_app.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_pipeline.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_swap_chain.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_model.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_game_object.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="lve_renderer.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="simple_render_system.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="dvd_render_system.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
     <ClInclude Include="scale_render_system.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
     <ClInclude Include="color_render_system.hpp">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="dvd_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="follow_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="first_app.hpp">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_swap_chain.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_renderer.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_pipeline.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_device.hpp">
+      <Filter>Header Files\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_window.hpp">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_game_object.hpp">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_model.hpp">
+      <Filter>Header Files\Objects</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

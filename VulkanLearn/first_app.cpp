@@ -1,7 +1,9 @@
-#include "first_app.hpp"
 #include "dvd_render_system.hpp"
 #include "scale_render_system.hpp"
 #include "color_render_system.hpp"
+#include "follow_render_system.hpp"
+
+#include "first_app.hpp"
 #include <stdexcept>
 #include <array>
 #include <conio.h>
@@ -44,8 +46,9 @@ namespace lve
 	void FirstApp::run()
 	{
 		DvdRenerSystem dvd_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
-		ScaleRenderSystem scale_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+		//ScaleRenderSystem scale_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		ColorRenderSystem color_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+		FollowRenderSystem follow_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
@@ -58,9 +61,11 @@ namespace lve
 
 				if (auto command_buffer = lve_renderer.beginFrame())
 				{
-					dvd_render_system.update(game_objects.begin(), game_objects.end(), 0.02f);
-					scale_render_system.update(game_objects.begin(), game_objects.end());
+					dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.02f);
 					color_render_system.update(game_objects.begin(), game_objects.end());
+					follow_render_system.update(game_objects.begin(), game_objects.end(), 0.05f);
+
+					//scale_render_system.update(game_objects.begin(), game_objects.end());
 
 					lve_renderer.beginSwapChainRenderPass(command_buffer);
 					dvd_render_system.renderGameObjects(command_buffer, game_objects);
