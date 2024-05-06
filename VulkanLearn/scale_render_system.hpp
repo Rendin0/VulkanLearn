@@ -9,7 +9,7 @@ namespace lve
 		ScaleRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~ScaleRenderSystem();
 
-		void update(std::vector<LveGameObject>& game_objects);
+		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end);
 	};
 
 }

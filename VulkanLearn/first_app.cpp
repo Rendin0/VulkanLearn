@@ -59,7 +59,7 @@ namespace lve
 				if (auto command_buffer = lve_renderer.beginFrame())
 				{
 					dvd_render_system.update(game_objects.begin(), game_objects.end(), 0.02f);
-					//scale_render_system.update(game_objects);
+					scale_render_system.update(game_objects.begin(), game_objects.end());
 					color_render_system.update(game_objects.begin(), game_objects.end());
 
 					lve_renderer.beginSwapChainRenderPass(command_buffer);

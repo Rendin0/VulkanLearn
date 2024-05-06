@@ -12,11 +12,11 @@ namespace lve
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
 
-	void ScaleRenderSystem::update(std::vector<LveGameObject>& game_objects)
+	void ScaleRenderSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end)
 	{
-		for (auto& object : game_objects)
+		for (auto object = begin; object != end; object++)
 		{
-			object.transform_2d.scale = glm::vec2(((1.f - glm::abs(object.transform_2d.translation.x)) * (1.f - glm::abs(object.transform_2d.translation.y))) * 0.5);
+			object->transform_2d.scale = glm::vec2(((1.f - glm::abs(object->transform_2d.translation.x)) * (1.f - glm::abs(object->transform_2d.translation.y))) * 0.5);
 		}
 	}
 }
