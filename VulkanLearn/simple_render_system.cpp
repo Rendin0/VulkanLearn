@@ -79,6 +79,7 @@ namespace lve
 			vertices.push_back(uniqueVertices[(i + 1) % numSides]);
 			vertices.push_back(uniqueVertices[numSides]);
 		}
+
 		return std::make_unique<LveModel>(device, vertices);
 	}
 

@@ -44,6 +44,9 @@ namespace lve
 		void addSquare();
 		void addCircle();
 
+		void addObject(std::shared_ptr<LveModel> model);
+		void addObject(std::shared_ptr<LveModel> model, float scale);
+
 		bool paused = false;
 
 		std::vector<LveGameObject> game_objects;

@@ -20,6 +20,9 @@ namespace lve
 
 			object.transform_2d.rotation = atan2(object.transform_2d.translation.y, object.transform_2d.translation.x);
 
+			object.transform_2d.scale.x = ((1.f - glm::abs(object.transform_2d.translation.x)) * (1.f - glm::abs(object.transform_2d.translation.y))) * 0.5;
+			object.transform_2d.scale.y = ((1.f - glm::abs(object.transform_2d.translation.x)) * (1.f - glm::abs(object.transform_2d.translation.y))) * 0.5;
+
 		}
 	}
 	void DvdRenerSystem::renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects)

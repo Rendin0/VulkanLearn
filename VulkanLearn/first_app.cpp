@@ -85,36 +85,46 @@ namespace lve
 
 	void FirstApp::addTriangle()
 	{
-		auto triangle = LveGameObject::createGameObject();
-		triangle.transform_2d.translation = { (rand() % 100) / 100.f, (rand() % 100) / 100.f };
-		triangle.model = SimpleRenderSystem::createTriangleModel(lve_device);
-		triangle.color = { glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f) };
-		triangle.transform_2d.scale = { 0.1f, 0.1f };
-
-		game_objects.push_back(std::move(triangle));
+		addObject(SimpleRenderSystem::createTriangleModel(lve_device));
 	}
 
 	void FirstApp::addSquare()
 	{
-		auto square = LveGameObject::createGameObject();
-		square.transform_2d.translation = { (rand() % 100) / 100.f, (rand() % 100) / 100.f };
-		square.model = SimpleRenderSystem::createSquareModel(lve_device);
-		square.color = { glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f) };
-		square.transform_2d.scale = { 0.1f, 0.1f };
-
-		game_objects.push_back(std::move(square));
+		addObject(SimpleRenderSystem::createSquareModel(lve_device));
 	}
 
 	void FirstApp::addCircle()
 	{
+		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f);
+	}
+
+	void FirstApp::addObject(std::shared_ptr<LveModel> model)
+	{
+		addObject(model, 1.f);
+	}
+
+	void FirstApp::addObject(std::shared_ptr<LveModel> model, float scale)
+	{
+		glm::vec3 color
+		{
+			glm::pow((rand() % 100) / 100.f, 2.2f),
+			glm::pow((rand() % 100) / 100.f, 2.2f),
+			glm::pow((rand() % 100) / 100.f, 2.2f)
+		};
+
+		glm::vec2 offset
+		{
+			(rand() % 100) / 100.f,
+			(rand() % 100) / 100.f
+		};
+
 		auto circle = LveGameObject::createGameObject();
-		circle.transform_2d.translation = { (rand() % 100) / 100.f, (rand() % 100) / 100.f };
-		circle.model = SimpleRenderSystem::createCircleModel(lve_device, 100);
-		circle.color = { glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f), glm::pow((rand() % 100) / 100.f, 2.2f) };
-		circle.transform_2d.scale = { 0.05f, 0.05f };
+		circle.transform_2d.translation = offset;
+		circle.model = model;
+		circle.color = color;
+		circle.transform_2d.scale = { 0.1f * scale, 0.1f * scale };
 
 		game_objects.push_back(std::move(circle));
-
 	}
 
 	LveWindow* FirstApp::lveWindow()
