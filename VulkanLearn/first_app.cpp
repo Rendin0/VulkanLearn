@@ -68,42 +68,15 @@ namespace lve
 			{{0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}},
 			{{-0.5f, 0.5f}, {0.0f, 0.5f, 0.5f}}
 		};
-
 		auto lve_model = std::make_shared<LveModel>(lve_device, vertices);
 
+		auto triangle = LveGameObject::createGameObject();
+		triangle.model = lve_model;
+		triangle.color = { .1f, .8f, .1f };
 
-		std::vector<glm::vec3> colors =
-		{
-			{1.f, .7f, .73f},
-			{1.f, .87f, .73f},
-			{1.f, 1.f, .73f},
-			{.73f, 1.f, .8f},
-			{.73, .88f, 1.f}
-		};
-
-		std::vector<glm::vec2> translations =
-		{
-			{{0.f}, {-1.f}},
-			{{1.f}, {1.f}},
-			{{-1.f}, {1.f}}
-		};
-
-		for (int i = 0; i < 3; i++)
-		{
-			auto triangle = LveGameObject::createGameObject();
-			triangle.model = lve_model;
-			triangle.color = { colors[i % colors.size()] };
-			triangle.transform_2d.translation.x = translations[i % translations.size()].x * 0.25f;
-			triangle.transform_2d.translation.y = translations[i % translations.size()].y * 0.25f;
-			triangle.transform_2d.scale *= glm::vec2(.5f);
-			//triangle.transform_2d.rotation = i * glm::pi<float>() * .025f;
-
-			game_objects.push_back(std::move(triangle));
-		}
-
-
+		game_objects.push_back(std::move(triangle));
 	}
-	
+
 	LveWindow* FirstApp::lveWindow()
 	{
 		return &lve_window;
