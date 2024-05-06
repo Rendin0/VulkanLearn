@@ -18,7 +18,7 @@ namespace lve
 	class FirstApp
 	{
 	public:
-		static constexpr int WIDTH = 800;
+		static constexpr int WIDTH =  800;
 		static constexpr int HEIGHT = 800;
 
 		void run();
@@ -32,6 +32,7 @@ namespace lve
 	private:
 		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
 
+		void addTriangle();
 		void loadGameObjects();
 
 		LveWindow lve_window{ WIDTH, HEIGHT, "World!" };

@@ -1,5 +1,5 @@
 #include "first_app.hpp"
-#include "simple_render_system.hpp"
+#include "dvd_render_system.hpp"
 #include <stdexcept>
 #include <array>
 #include <conio.h>
@@ -18,6 +18,7 @@ namespace lve
 			switch (key)
 			{
 			case GLFW_KEY_ENTER:
+				app->addTriangle();
 				//app->vertices = LveModel::Vertex::makeSerpinskiStep(app->vertices);
 				//app->reloadModels(app->vertices);
 				break;
@@ -33,7 +34,7 @@ namespace lve
 	}
 	void FirstApp::run()
 	{
-		SimpleRenderSystem simple_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+		DvdRenerSystem simple_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
@@ -44,6 +45,8 @@ namespace lve
 
 			if (auto command_buffer = lve_renderer.beginFrame())
 			{
+				simple_render_system.update(game_objects);
+
 				lve_renderer.beginSwapChainRenderPass(command_buffer);
 				simple_render_system.renderGameObjects(command_buffer, game_objects);
 				lve_renderer.endSwapChainRenderPass(command_buffer);
@@ -60,6 +63,25 @@ namespace lve
 	{
 	}
 
+	void FirstApp::addTriangle()
+	{
+		vertices =
+		{
+			{{0.0f, -0.5f}, {0.1f, 0.0f, 0.34f}},
+			{{0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}},
+			{{-0.5f, 0.5f}, {0.0f, 0.5f, 0.5f}}
+		};
+		auto lve_model = std::make_shared<LveModel>(lve_device, vertices);
+
+		auto triangle = LveGameObject::createGameObject();
+		triangle.transform_2d.translation = { (rand() % 100) / 100.f, (rand() % 100) / 100.f };
+		triangle.model = lve_model;
+		triangle.color = { (rand() % 100) / 100.f, (rand() % 100) / 100.f, (rand() % 100) / 100.f };
+		triangle.transform_2d.scale = { 0.1f, 0.1f };
+
+		game_objects.push_back(std::move(triangle));
+	}
+
 	void FirstApp::loadGameObjects()
 	{
 		vertices =
@@ -73,6 +95,7 @@ namespace lve
 		auto triangle = LveGameObject::createGameObject();
 		triangle.model = lve_model;
 		triangle.color = { .1f, .8f, .1f };
+		triangle.transform_2d.scale = { 0.1f, 0.1f };
 
 		game_objects.push_back(std::move(triangle));
 	}

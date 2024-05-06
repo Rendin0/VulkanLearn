@@ -41,10 +41,14 @@ namespace lve
 		std::shared_ptr<LveModel> model{};
 		glm::vec3 color{};
 
+		void changeDirection(glm::vec2 changes);
+		glm::vec2 getDirection();
+
+
 	private:
 		LveGameObject(id_t obj_id);
 
-
+		glm::vec2 direction{ (rand() % 100) / 100.f, (rand() % 100) / 100.f };
 
 		id_t id;
 	};

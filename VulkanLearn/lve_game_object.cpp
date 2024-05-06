@@ -8,6 +8,21 @@ namespace lve
 
 		return LveGameObject(current_id++);
 	}
+	void LveGameObject::changeDirection(glm::vec2 changes)
+	{
+		int cut_zero[2] = {glm::abs(changes.x), glm::abs(changes.y)};
+
+		cut_zero[0] = (cut_zero[0] * -2) + 1;
+		cut_zero[1] = (cut_zero[1] * -2) + 1;
+
+		direction *= glm::vec2{ cut_zero[0], cut_zero[1] };
+	}
+
+	glm::vec2 LveGameObject::getDirection()
+	{
+		return direction;
+	}
+
 	LveGameObject::LveGameObject(id_t obj_id)
 		: id(obj_id)
 	{

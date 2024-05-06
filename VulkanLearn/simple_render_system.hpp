@@ -14,6 +14,13 @@
 
 namespace lve
 {
+	struct SimplePushConstantData
+	{
+		glm::mat2 transform{ 1.f };
+		glm::vec2 offset;
+		alignas(16) glm::vec3 color;
+	};
+
 	class SimpleRenderSystem
 	{
 	public:
@@ -22,14 +29,13 @@ namespace lve
 
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
-		void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);
-	private:
+		virtual void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);
+	protected:
 
 		void createPipelineLayout();
 		void createPipeline(VkRenderPass render_pass);
 
 		LveDevice& lve_device;
-		std::vector<LveModel::Vertex> vertices;
 
 		std::unique_ptr<LvePipeline> lve_pipeline;
 		VkPipelineLayout pipeline_layout;
