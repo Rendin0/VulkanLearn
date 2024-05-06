@@ -9,6 +9,6 @@ namespace lve
 		DvdRenerSystem(LveDevice& device, VkRenderPass render_pass);
 		~DvdRenerSystem();
 
-		void update(std::vector<LveGameObject>& game_objects, const float& speed);
+		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end, const float& speed);
 	};
 }

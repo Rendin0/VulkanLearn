@@ -9,6 +9,6 @@ namespace lve
 		ColorRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~ColorRenderSystem();
 
-		void update(std::vector<LveGameObject>& game_objects);
+		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end);
 	};
 }

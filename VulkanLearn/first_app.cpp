@@ -58,9 +58,9 @@ namespace lve
 
 				if (auto command_buffer = lve_renderer.beginFrame())
 				{
-					dvd_render_system.update(game_objects, 0.02f);
+					dvd_render_system.update(game_objects.begin(), game_objects.end(), 0.02f);
 					//scale_render_system.update(game_objects);
-					color_render_system.update(game_objects);
+					color_render_system.update(game_objects.begin(), game_objects.end());
 
 					lve_renderer.beginSwapChainRenderPass(command_buffer);
 					dvd_render_system.renderGameObjects(command_buffer, game_objects);
@@ -79,10 +79,10 @@ namespace lve
 	{
 	}
 
-
-
 	void FirstApp::loadGameObjects()
-	{}
+	{
+		addCircle();
+	}
 
 	void FirstApp::togglePause()
 	{
@@ -114,14 +114,14 @@ namespace lve
 		glm::vec3 color
 		{
 			(rand() % 50) / 100.f + 0.5f,
-			(rand() % 50) / 100.f + 0.5f,
+			(rand() % 50) / 100.f + 0.2f,
 			(rand() % 50) / 100.f + 0.5f
 		};
 
 		glm::vec2 offset
 		{
-			(rand() % 100) / 100.f,
-			(rand() % 100) / 100.f
+			(rand() % 200) / 100.f - 1,
+			(rand() % 200) / 100.f - 1
 		};
 
 		auto circle = LveGameObject::createGameObject();

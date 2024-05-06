@@ -10,15 +10,15 @@ namespace lve
 	{
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
-	void DvdRenerSystem::update(std::vector<LveGameObject>& game_objects, const float& speed)
+	void DvdRenerSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end, const float& speed)
 	{
-		for (auto& object : game_objects)
+		for (auto object = begin; object != end; object++)
 		{
-			object.changeDirection(object.transform_2d.translation);
+			object->changeDirection(object->transform_2d.translation);
 
-			object.transform_2d.translation += (object.getDirection() * speed);
+			object->transform_2d.translation += (object->getDirection() * speed);
 
-			object.transform_2d.rotation = atan2(object.transform_2d.translation.y, object.transform_2d.translation.x);
+			object->transform_2d.rotation = atan2(object->transform_2d.translation.y, object->transform_2d.translation.x);
 		}
 	}
 }
