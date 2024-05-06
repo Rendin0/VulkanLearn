@@ -48,7 +48,7 @@ namespace lve
 	private:
 		LveGameObject(id_t obj_id);
 
-		glm::vec2 direction{ (rand() % 100) / 100.f, (rand() % 100) / 100.f };
+		glm::vec2 direction{ (((rand() % 2) * 2) - 1) * 0.9f, (((rand() % 2) * 2) - 1) * 0.85f };
 
 		id_t id;
 	};

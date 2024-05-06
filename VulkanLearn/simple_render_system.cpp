@@ -5,6 +5,7 @@
 #include <thread>
 #include <ctime>
 #include "simple_render_system.hpp"
+#include <memory>
 
 
 namespace lve
@@ -37,6 +38,49 @@ namespace lve
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
 
+	std::unique_ptr<LveModel> SimpleRenderSystem::createTriangleModel(LveDevice& lve_device)
+	{
+		std::vector<LveModel::Vertex> vertices =
+		{
+			{{0.0f, -0.5f}, {0.1f, 0.0f, 0.34f}},
+			{{0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}},
+			{{-0.5f, 0.5f}, {0.0f, 0.5f, 0.5f}}
+		};
+		return std::make_unique<LveModel>(lve_device, vertices);
+	}
+
+	std::unique_ptr<LveModel> SimpleRenderSystem::createSquareModel(LveDevice& lve_device)
+	{
+		std::vector<LveModel::Vertex> vertices =
+		{
+			{{-0.5f, -0.5f}},
+			{{0.5f, 0.5f}},
+			{{-0.5f, 0.5f}},
+			{{-0.5f, -0.5f}},
+			{{0.5f, -0.5f}},
+			{{0.5f, 0.5f}},
+		};
+
+		return std::make_unique<LveModel>(lve_device, vertices);
+	}
+
+	std::unique_ptr<LveModel> SimpleRenderSystem::createCircleModel(LveDevice& device, unsigned int numSides)
+	{
+		std::vector<LveModel::Vertex> uniqueVertices{};
+		for (int i = 0; i < numSides; i++) {
+			float angle = i * glm::two_pi<float>() / numSides;
+			uniqueVertices.push_back({ {glm::cos(angle), glm::sin(angle)} });
+		}
+		uniqueVertices.push_back({});  // adds center vertex at 0, 0
+
+		std::vector<LveModel::Vertex> vertices{};
+		for (int i = 0; i < numSides; i++) {
+			vertices.push_back(uniqueVertices[i]);
+			vertices.push_back(uniqueVertices[(i + 1) % numSides]);
+			vertices.push_back(uniqueVertices[numSides]);
+		}
+		return std::make_unique<LveModel>(device, vertices);
+	}
 
 	void SimpleRenderSystem::createPipelineLayout()
 	{

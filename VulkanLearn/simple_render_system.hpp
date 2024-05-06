@@ -27,6 +27,10 @@ namespace lve
 		SimpleRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~SimpleRenderSystem();
 
+		static std::unique_ptr<LveModel> createTriangleModel(LveDevice& lve_device);
+		static std::unique_ptr<LveModel> createSquareModel(LveDevice& lve_device);
+		static std::unique_ptr<LveModel> createCircleModel(LveDevice& device, unsigned int numSides);
+
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
 		virtual void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);

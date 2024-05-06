@@ -187,9 +187,4 @@ namespace lve
 		vkFreeCommandBuffers(lve_device.device(), lve_device.getCommandPool(), static_cast<uint32_t>(command_buffers.size()), command_buffers.data());
 		command_buffers.clear();
 	}
-
-	LveWindow* LveRenderer::lveWindow()
-	{
-		return &lve_window;
-	}
 }

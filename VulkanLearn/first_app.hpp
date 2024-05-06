@@ -32,15 +32,19 @@ namespace lve
 	private:
 		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
 
-		void addTriangle();
 		void loadGameObjects();
 
 		LveWindow lve_window{ WIDTH, HEIGHT, "World!" };
 		LveDevice lve_device{ lve_window };
-		std::vector<LveModel::Vertex> vertices;
 		LveRenderer lve_renderer{ lve_window, lve_device };
 
+		void togglePause();
 
+		void addTriangle();
+		void addSquare();
+		void addCircle();
+
+		bool paused = false;
 
 		std::vector<LveGameObject> game_objects;
 	};
