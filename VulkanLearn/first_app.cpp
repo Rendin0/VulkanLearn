@@ -2,6 +2,7 @@
 #include "scale_render_system.hpp"
 #include "color_render_system.hpp"
 #include "follow_render_system.hpp"
+#include "pushback_render_system.hpp"
 
 #include "first_app.hpp"
 #include <stdexcept>
@@ -49,6 +50,7 @@ namespace lve
 		//ScaleRenderSystem scale_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		ColorRenderSystem color_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		FollowRenderSystem follow_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+		PushbackRenderSystem pushback_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
@@ -64,6 +66,7 @@ namespace lve
 					dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.02f);
 					color_render_system.update(game_objects.begin(), game_objects.end());
 					follow_render_system.update(game_objects.begin(), game_objects.end(), 0.05f);
+					pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.01f);
 
 					//scale_render_system.update(game_objects.begin(), game_objects.end());
 

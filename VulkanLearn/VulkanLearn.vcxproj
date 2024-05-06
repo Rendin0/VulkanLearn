@@ -213,6 +213,7 @@
   </CustomBuildStep>
 </ItemDefinitionGroup> -->
   <ItemGroup>
+    <None Include="pushback_render_system.hpp" />
     <None Include="Shaders\simple_shader.frag" />
     <None Include="Shaders\simple_shader.frag.spv" />
     <None Include="Shaders\simple_shader.vert" />
@@ -231,6 +232,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lve_device.cpp" />
     <ClCompile Include="lve_swap_chain.cpp" />
+    <ClCompile Include="pushback_render_system.cpp" />
     <ClCompile Include="scale_render_system.cpp" />
     <ClCompile Include="simple_render_system.cpp" />
   </ItemGroup>
