@@ -33,7 +33,7 @@ namespace lve
 
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
-		virtual void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);
+		void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);
 	protected:
 
 		void createPipelineLayout();

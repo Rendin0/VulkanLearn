@@ -10,7 +10,5 @@ namespace lve
 		~DvdRenerSystem();
 
 		void update(std::vector<LveGameObject>& game_objects, const float& speed);
-
-		void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects) override;
 	};
 }
