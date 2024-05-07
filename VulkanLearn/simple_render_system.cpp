@@ -42,9 +42,9 @@ namespace lve
 	{
 		std::vector<LveModel::Vertex> vertices =
 		{
-			{{0.0f, -0.5f}, {0.1f, 0.0f, 0.34f}},
-			{{0.5f, 0.5f}, {0.5f, 0.5f, 0.5f}},
-			{{-0.5f, 0.5f}, {0.0f, 0.5f, 0.5f}}
+			{{0.0f, -0.5f}},
+			{{0.5f, 0.5f}},
+			{{-0.5f, 0.5f}}
 		};
 		return std::make_unique<LveModel>(lve_device, vertices);
 	}

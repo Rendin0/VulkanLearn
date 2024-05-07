@@ -104,6 +104,9 @@
     <ClCompile Include="pushback_render_system.cpp">
       <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
+    <ClCompile Include="holding_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="simple_render_system.hpp">
@@ -144,6 +147,9 @@
     </ClInclude>
     <ClInclude Include="lve_model.hpp">
       <Filter>Header Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="holding_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

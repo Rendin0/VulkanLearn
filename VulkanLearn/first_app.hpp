@@ -47,6 +47,8 @@ namespace lve
 		void addObject(std::shared_ptr<LveModel> model);
 		void addObject(std::shared_ptr<LveModel> model, float scale);
 
+		void eraseObjects();
+
 		bool paused = false;
 
 		std::vector<LveGameObject> game_objects;

@@ -28,8 +28,8 @@ namespace lve
 				//app->vertices = LveModel::Vertex::makeSerpinskiStep(app->vertices);
 				//app->reloadModels(app->vertices);
 				break;
-			case GLFW_KEY_ESCAPE: // Todo: Closing window by key
-				//app->lve_window.windowShouldClose();
+			case GLFW_KEY_ESCAPE:
+				app->eraseObjects();
 				break;
 			case GLFW_KEY_S:
 				app->addSquare();
@@ -72,10 +72,10 @@ namespace lve
 					if (auto command_buffer = lve_renderer.beginFrame())
 					{
 
-						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.15f);
+						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.015f);
 						color_render_system.update(game_objects.begin(), game_objects.end());
 						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
-						pushback_render_system.update(game_objects.begin(), game_objects.end(), .05f, 0.03f);
+						pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.03f);
 						holding_render_system.update(game_objects.begin(), game_objects.end());
 
 						//scale_render_system.update(game_objects.begin(), game_objects.end());
@@ -151,6 +151,11 @@ namespace lve
 		circle.transform_2d.scale = { 0.1f * scale, 0.1f * scale };
 
 		game_objects.push_back(std::move(circle));
+	}
+
+	void FirstApp::eraseObjects()
+	{
+		game_objects.erase(game_objects.begin() + 1, game_objects.end());
 	}
 
 	LveWindow* FirstApp::lveWindow()
