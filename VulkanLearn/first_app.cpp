@@ -45,6 +45,22 @@ namespace lve
 			}
 		}
 	}
+	void FirstApp::mouseProcess(GLFWwindow* window, int button, int action, int mods)
+	{
+		FirstApp* app = static_cast<FirstApp*>(glfwGetWindowUserPointer(window));
+
+		if (action == GLFW_PRESS)
+		{
+			if (button == GLFW_MOUSE_BUTTON_LEFT)
+			{
+				double x, y;
+				glfwGetCursorPos(window, &x, &y);
+				glm::vec2 pos{static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1)};
+
+				app->setObjectTranslation(0, pos);
+			}
+		}
+	}
 	void FirstApp::run()
 	{
 		DvdRenerSystem dvd_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
@@ -57,6 +73,8 @@ namespace lve
 
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
+		lve_window.setMouseButtonCallback(mouseProcess);
+		
 
 		time_t timer = clock();
 
@@ -151,6 +169,11 @@ namespace lve
 		circle.transform_2d.scale = { 0.1f * scale, 0.1f * scale };
 
 		game_objects.push_back(std::move(circle));
+	}
+
+	void FirstApp::setObjectTranslation(size_t index, glm::vec2 translation)
+	{
+		game_objects[index].transform_2d.translation = translation;
 	}
 
 	void FirstApp::eraseObjects()

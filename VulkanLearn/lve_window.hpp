@@ -18,6 +18,7 @@ namespace lve
 
 		bool shouldClose();
 		void setKeyCallback(const GLFWkeyfun& keyProcess);
+		void setMouseButtonCallback(const GLFWmousebuttonfun& mouseProcess);
 		void setWindowUserPointer(void* ptr);
 
 		bool wasWindowResized();

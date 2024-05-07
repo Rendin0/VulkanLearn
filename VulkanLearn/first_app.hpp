@@ -31,6 +31,7 @@ namespace lve
 		FirstApp& operator=(const FirstApp&) = delete;
 	private:
 		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
+		static void mouseProcess(GLFWwindow* window, int button, int action, int mods);
 
 		void loadGameObjects();
 
@@ -46,6 +47,8 @@ namespace lve
 
 		void addObject(std::shared_ptr<LveModel> model);
 		void addObject(std::shared_ptr<LveModel> model, float scale);
+
+		void setObjectTranslation(size_t index, glm::vec2 translation);
 
 		void eraseObjects();
 

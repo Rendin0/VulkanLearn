@@ -24,6 +24,11 @@ namespace lve
 		glfwSetKeyCallback(window, keyProcess);
 	}
 
+	void LveWindow::setMouseButtonCallback(const GLFWmousebuttonfun& mouseProcess)
+	{
+		glfwSetMouseButtonCallback(window, mouseProcess);
+	}
+
 	void LveWindow::setWindowUserPointer(void* ptr)
 	{
 		glfwSetWindowUserPointer(window, ptr);
