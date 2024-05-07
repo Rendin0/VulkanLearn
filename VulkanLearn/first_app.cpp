@@ -69,11 +69,10 @@ namespace lve
 			{
 				if (clock() - timer >= (1000 / fps))
 				{
-
 					if (auto command_buffer = lve_renderer.beginFrame())
 					{
 
-						dvd_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
+						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.15f);
 						color_render_system.update(game_objects.begin(), game_objects.end());
 						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
 						pushback_render_system.update(game_objects.begin(), game_objects.end(), .05f, 0.03f);
