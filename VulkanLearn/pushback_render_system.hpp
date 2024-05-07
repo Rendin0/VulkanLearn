@@ -9,6 +9,6 @@ namespace lve
 		PushbackRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~PushbackRenderSystem();
 
-		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end, const float& factor);
+		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end, const float& repulsion_radius, const float& factor);
 	};
 }

@@ -3,6 +3,7 @@
 #include "color_render_system.hpp"
 #include "follow_render_system.hpp"
 #include "pushback_render_system.hpp"
+#include "holding_render_system.hpp"
 
 #include "first_app.hpp"
 #include <stdexcept>
@@ -51,29 +52,41 @@ namespace lve
 		ColorRenderSystem color_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		FollowRenderSystem follow_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		PushbackRenderSystem pushback_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+		HoldingRenerSystem holding_render_system(lve_device, lve_renderer.getSwapChainRenderPass());
+
 
 		lve_window.setWindowUserPointer(this);
 		lve_window.setKeyCallback(keyProcess);
+
+		time_t timer = clock();
+
+		uint32_t fps = 120;
 
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
 			if (!paused)
 			{
-
-				if (auto command_buffer = lve_renderer.beginFrame())
+				if (clock() - timer >= (1000 / fps))
 				{
-					dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.02f);
-					color_render_system.update(game_objects.begin(), game_objects.end());
-					follow_render_system.update(game_objects.begin(), game_objects.end(), 0.05f);
-					pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.01f);
 
-					//scale_render_system.update(game_objects.begin(), game_objects.end());
+					if (auto command_buffer = lve_renderer.beginFrame())
+					{
 
-					lve_renderer.beginSwapChainRenderPass(command_buffer);
-					dvd_render_system.renderGameObjects(command_buffer, game_objects);
-					lve_renderer.endSwapChainRenderPass(command_buffer);
-					lve_renderer.endFrame();
+						dvd_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
+						color_render_system.update(game_objects.begin(), game_objects.end());
+						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
+						pushback_render_system.update(game_objects.begin(), game_objects.end(), .05f, 0.03f);
+						holding_render_system.update(game_objects.begin(), game_objects.end());
+
+						//scale_render_system.update(game_objects.begin(), game_objects.end());
+
+						lve_renderer.beginSwapChainRenderPass(command_buffer);
+						dvd_render_system.renderGameObjects(command_buffer, game_objects);
+						lve_renderer.endSwapChainRenderPass(command_buffer);
+						lve_renderer.endFrame();
+					}
+					timer = clock();
 				}
 			}
 		}

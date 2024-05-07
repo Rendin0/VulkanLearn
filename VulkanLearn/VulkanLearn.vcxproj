@@ -224,6 +224,7 @@
     <ClCompile Include="dvd_render_system.cpp" />
     <ClCompile Include="first_app.cpp" />
     <ClCompile Include="follow_render_system.cpp" />
+    <ClCompile Include="holding_render_system.cpp" />
     <ClCompile Include="lve_game_object.cpp" />
     <ClCompile Include="lve_model.cpp" />
     <ClCompile Include="lve_pipeline.cpp" />
@@ -241,6 +242,7 @@
     <ClInclude Include="dvd_render_system.hpp" />
     <ClInclude Include="first_app.hpp" />
     <ClInclude Include="follow_render_system.hpp" />
+    <ClInclude Include="holding_render_system.hpp" />
     <ClInclude Include="lve_game_object.hpp" />
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
