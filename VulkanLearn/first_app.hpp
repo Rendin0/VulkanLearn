@@ -18,8 +18,8 @@ namespace lve
 	class FirstApp
 	{
 	public:
-		static constexpr int WIDTH =  800;
-		static constexpr int HEIGHT = 800;
+		static constexpr int WIDTH =  1080;
+		static constexpr int HEIGHT = 1080;
 
 		void run();
 		LveWindow* lveWindow();
@@ -46,7 +46,7 @@ namespace lve
 		void addCircle();
 		void addCircle(glm::vec2 pos);
 
-		void addStaticFat();
+		void addStaticFat(glm::vec2 pos);
 		void addObject(std::shared_ptr<LveModel> model);
 		void addObject(std::shared_ptr<LveModel> model, float scale, float mass);
 		void addObject(std::shared_ptr<LveModel> model, float scale, float mass, glm::vec2 offset);

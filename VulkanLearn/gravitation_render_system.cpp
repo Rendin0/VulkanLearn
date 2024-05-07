@@ -22,7 +22,7 @@ namespace lve
 
 	void GravitationRenderSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end)
 	{
-		const double GRAVITY = 6.6742E-11;
+		const double GRAVITY = 6.6742E-5;
 
 		for (auto object = begin; object != end; object++)
 		{

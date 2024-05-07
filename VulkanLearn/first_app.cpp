@@ -39,7 +39,7 @@ namespace lve
 				app->addCircle();
 				break;
 			case GLFW_KEY_F:
-				app->addStaticFat();
+				app->addStaticFat(glm::vec2{ 0.f });
 				break;
 			case GLFW_KEY_SPACE:
 				app->togglePause();
@@ -73,7 +73,7 @@ namespace lve
 				glfwGetCursorPos(window, &x, &y);
 				glm::vec2 pos{ static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1) };
 
-				app->addCircle(pos);
+				app->addStaticFat(pos);
 
 				break;
 			}
@@ -103,11 +103,11 @@ namespace lve
 		while (!lve_window.shouldClose())
 		{
 			glfwPollEvents();
-			if (!paused)
+			if (clock() - timer >= (1000 / fps))
 			{
-				if (clock() - timer >= (1000 / fps))
+				if (auto command_buffer = lve_renderer.beginFrame())
 				{
-					if (auto command_buffer = lve_renderer.beginFrame())
+					if (!paused)
 					{
 
 						move_render_system.update(game_objects.begin(), game_objects.end());
@@ -118,15 +118,14 @@ namespace lve
 						color_render_system.update(game_objects.begin(), game_objects.end());
 
 						//bounce_render_system.update(game_objects.begin(), game_objects.end());
-						//holding_render_system.update(game_objects.begin(), game_objects.end());
-
-						lve_renderer.beginSwapChainRenderPass(command_buffer);
-						move_render_system.renderGameObjects(command_buffer, game_objects);
-						lve_renderer.endSwapChainRenderPass(command_buffer);
-						lve_renderer.endFrame();
+						holding_render_system.update(game_objects.begin(), game_objects.end());
 					}
-					timer = clock();
+					lve_renderer.beginSwapChainRenderPass(command_buffer);
+					move_render_system.renderGameObjects(command_buffer, game_objects);
+					lve_renderer.endSwapChainRenderPass(command_buffer);
+					lve_renderer.endFrame();
 				}
+				timer = clock();
 			}
 		}
 	}
@@ -165,22 +164,17 @@ namespace lve
 
 	void FirstApp::addCircle(glm::vec2 pos)
 	{
-		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f, 2.f, pos);
+		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f, 1.f, pos);
 	}
 
-	void FirstApp::addStaticFat()
+	void FirstApp::addStaticFat(glm::vec2 pos)
 	{
-		glm::vec2 offset
-		{
-			0.f
-		};
-
 		glm::vec2 direction
 		{
 			0.f
 		};
 
-		addObject(SimpleRenderSystem::createCircleModel(lve_device, 6), 1.f, 330000.f, offset, direction);
+		addObject(SimpleRenderSystem::createCircleModel(lve_device, 6), 1.f, 1000.f, pos, direction);
 	}
 
 	void FirstApp::addObject(std::shared_ptr<LveModel> model)
@@ -201,7 +195,7 @@ namespace lve
 
 	void FirstApp::addObject(std::shared_ptr<LveModel> model, float scale, float mass, glm::vec2 offset)
 	{
-		glm::vec2 direction{(((rand() % 2) * 2) - 1) , (((rand() % 2) * 2) - 1)};
+		glm::vec2 direction{ (((rand() % 2) * 2) - 1) , (((rand() % 2) * 2) - 1) };
 		addObject(model, scale, mass, offset, direction);
 	}
 
@@ -218,7 +212,7 @@ namespace lve
 		object.transform_2d.translation = offset;
 		object.model = model;
 		object.color = color;
-		object.transform_2d.scale = { 0.04f * scale, 0.04f * scale };
+		object.transform_2d.scale = { 0.02f * scale, 0.02f * scale };
 		object.mass = mass;
 		object.speed = 0.025f / mass;
 		object.direction = direction;
