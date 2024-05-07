@@ -43,16 +43,18 @@ namespace lve
 
 		void addTriangle();
 		void addSquare();
-		void addCircle();
+		void addCircle(glm::vec2 offset, glm::vec2 vector);
 		void addCircle(glm::vec2 pos);
 
-		void addStaticFat(glm::vec2 pos);
+		void addStaticFat(glm::vec2 pos, glm::vec2 vector);
 		void addObject(std::shared_ptr<LveModel> model);
 		void addObject(std::shared_ptr<LveModel> model, float scale, float mass);
 		void addObject(std::shared_ptr<LveModel> model, float scale, float mass, glm::vec2 offset);
 		void addObject(std::shared_ptr<LveModel> model, float scale, float mass, glm::vec2 offset, glm::vec2 direction);
 
 		void setObjectTranslation(size_t index, glm::vec2 translation);
+
+		glm::vec2 old_mouse_pos;
 
 		void eraseObjects();
 

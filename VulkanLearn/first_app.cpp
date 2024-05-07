@@ -36,10 +36,10 @@ namespace lve
 				app->addSquare();
 				break;
 			case GLFW_KEY_C:
-				app->addCircle();
+				app->addCircle(glm::vec2{rand() % 100 / 100.f});
 				break;
 			case GLFW_KEY_F:
-				app->addStaticFat(glm::vec2{ 0.f });
+				app->addStaticFat(glm::vec2{ 0.f }, glm::vec2{ 0.f });
 				break;
 			case GLFW_KEY_SPACE:
 				app->togglePause();
@@ -53,14 +53,16 @@ namespace lve
 	{
 		FirstApp* app = static_cast<FirstApp*>(glfwGetWindowUserPointer(window));
 
+		double x, y;
+
+		glm::vec2 first_pos{}, second_pos{};
+
 		if (action == GLFW_PRESS)
 		{
 			switch (button)
 			{
 			case GLFW_MOUSE_BUTTON_LEFT:
 			{
-
-				double x, y;
 				glfwGetCursorPos(window, &x, &y);
 				glm::vec2 pos{ static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1) };
 
@@ -68,15 +70,24 @@ namespace lve
 				break;
 			}
 			case GLFW_MOUSE_BUTTON_RIGHT:
-			{
-				double x, y;
 				glfwGetCursorPos(window, &x, &y);
-				glm::vec2 pos{ static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1) };
+				app->old_mouse_pos = { static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1) };
 
-				app->addStaticFat(pos);
 
 				break;
 			}
+		}
+		if (action == GLFW_RELEASE)
+		{
+			switch (button)
+			{
+			case GLFW_MOUSE_BUTTON_RIGHT:
+				glfwGetCursorPos(window, &x, &y);
+				second_pos = { static_cast<float>(x / (WIDTH / 2) - 1), static_cast<float>(y / (HEIGHT / 2) - 1) };
+				app->addStaticFat(app->old_mouse_pos, second_pos - app->old_mouse_pos);
+
+
+				break;
 			}
 		}
 	}
@@ -157,9 +168,9 @@ namespace lve
 		addObject(SimpleRenderSystem::createSquareModel(lve_device));
 	}
 
-	void FirstApp::addCircle()
+	void FirstApp::addCircle(glm::vec2 offset, glm::vec2 vector)
 	{
-		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f, 1.f);
+		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f, 1.f, offset, vector);
 	}
 
 	void FirstApp::addCircle(glm::vec2 pos)
@@ -167,14 +178,10 @@ namespace lve
 		addObject(SimpleRenderSystem::createCircleModel(lve_device, 100), 0.5f, 1.f, pos);
 	}
 
-	void FirstApp::addStaticFat(glm::vec2 pos)
+	void FirstApp::addStaticFat(glm::vec2 pos, glm::vec2 vector)
 	{
-		glm::vec2 direction
-		{
-			0.f
-		};
 
-		addObject(SimpleRenderSystem::createCircleModel(lve_device, 6), 1.f, 1000.f, pos, direction);
+		addObject(SimpleRenderSystem::createCircleModel(lve_device, 6), 1.f, 1000.f, pos, vector);
 	}
 
 	void FirstApp::addObject(std::shared_ptr<LveModel> model)
