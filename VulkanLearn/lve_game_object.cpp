@@ -18,11 +18,6 @@ namespace lve
 		direction *= glm::vec2{ cut_zero[0], cut_zero[1] };
 	}
 
-	glm::vec2 LveGameObject::getDirection()
-	{
-		return direction;
-	}
-
 	LveGameObject::LveGameObject(id_t obj_id)
 		: id(obj_id)
 	{

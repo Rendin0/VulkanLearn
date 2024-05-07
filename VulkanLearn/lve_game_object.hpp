@@ -40,15 +40,14 @@ namespace lve
 		Transform2dComponent transform_2d{};
 		std::shared_ptr<LveModel> model{};
 		glm::vec3 color{};
+		glm::vec2 direction{};
+
+		float speed{};
+		float mass{};
 
 		void changeDirection(glm::vec2 changes);
-		glm::vec2 getDirection();
-
-
 	private:
 		LveGameObject(id_t obj_id);
-
-		glm::vec2 direction{ (((rand() % 2) * 2) - 1) * 0.9f, (((rand() % 2) * 2) - 1) * 0.85f };
 
 		id_t id;
 	};

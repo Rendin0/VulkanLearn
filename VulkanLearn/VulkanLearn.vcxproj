@@ -220,10 +220,11 @@
     <None Include="Shaders\simple_shader.vert.spv" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bounce_render_system.cpp" />
     <ClCompile Include="color_render_system.cpp" />
-    <ClCompile Include="dvd_render_system.cpp" />
+    <ClCompile Include="move_render_system.cpp" />
     <ClCompile Include="first_app.cpp" />
-    <ClCompile Include="follow_render_system.cpp" />
+    <ClCompile Include="gravitation_render_system.cpp" />
     <ClCompile Include="holding_render_system.cpp" />
     <ClCompile Include="lve_game_object.cpp" />
     <ClCompile Include="lve_model.cpp" />
@@ -238,10 +239,11 @@
     <ClCompile Include="simple_render_system.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="bounce_render_system.hpp" />
     <ClInclude Include="color_render_system.hpp" />
-    <ClInclude Include="dvd_render_system.hpp" />
+    <ClInclude Include="move_render_system.hpp" />
     <ClInclude Include="first_app.hpp" />
-    <ClInclude Include="follow_render_system.hpp" />
+    <ClInclude Include="gravitation_render_system.hpp" />
     <ClInclude Include="holding_render_system.hpp" />
     <ClInclude Include="lve_game_object.hpp" />
     <ClInclude Include="lve_model.hpp" />
