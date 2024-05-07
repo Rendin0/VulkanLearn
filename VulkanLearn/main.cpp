@@ -1,11 +1,11 @@
 #include "first_app.hpp"
 #include <iostream>
-
+#include <ctime>
 
 int main()
 {
+	srand(static_cast<int>(time(nullptr)));
 	lve::FirstApp app;
-
 
 	try
 	{

@@ -91,7 +91,7 @@ namespace lve
 					{
 
 						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.015f);
-						color_render_system.update(game_objects.begin(), game_objects.end());
+						color_render_system.update(game_objects.begin() + 1, game_objects.end());
 						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
 						pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.03f);
 						holding_render_system.update(game_objects.begin(), game_objects.end());
