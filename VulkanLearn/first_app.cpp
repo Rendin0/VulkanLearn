@@ -90,10 +90,10 @@ namespace lve
 					if (auto command_buffer = lve_renderer.beginFrame())
 					{
 
-						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.015f);
+						dvd_render_system.update(game_objects.begin(), game_objects.begin() + 1, 0.01f);
 						color_render_system.update(game_objects.begin() + 1, game_objects.end());
-						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.015f);
-						pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.03f);
+						follow_render_system.update(game_objects.begin(), game_objects.end(), 0.0f);
+						pushback_render_system.update(game_objects.begin(), game_objects.end(), 0.02f);
 						holding_render_system.update(game_objects.begin(), game_objects.end());
 
 						//scale_render_system.update(game_objects.begin(), game_objects.end());
