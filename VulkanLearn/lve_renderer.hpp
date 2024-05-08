@@ -27,6 +27,7 @@ namespace lve
 
 		VkCommandBuffer getCurrentCommandBuffer() const;
 		VkRenderPass getSwapChainRenderPass() const;
+		float getAspectRation() const;
 
 		VkCommandBuffer beginFrame();
 		void endFrame();

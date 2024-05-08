@@ -26,6 +26,8 @@ namespace lve
 
 		void createWindowSurface(VkInstance vk_instance, VkSurfaceKHR *vk_surface_khr);
 
+		GLFWwindow* getWindowPointer() const;
+
 		VkExtent2D getExtend();
 
 	private:

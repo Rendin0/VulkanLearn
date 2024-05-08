@@ -3,6 +3,7 @@
 #include "lve_device.hpp"
 #include "lve_model.hpp"
 #include "lve_game_object.hpp"
+#include "lve_camera.hpp"
 
 #include <memory>
 #include <vector>
@@ -26,13 +27,9 @@ namespace lve
 		SimpleRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~SimpleRenderSystem();
 
-		static std::unique_ptr<LveModel> createTriangleModel(LveDevice& lve_device);
-		static std::unique_ptr<LveModel> createSquareModel(LveDevice& lve_device);
-		static std::unique_ptr<LveModel> createCircleModel(LveDevice& device, unsigned int numSides);
-
 		SimpleRenderSystem(const SimpleRenderSystem&) = delete;
 		SimpleRenderSystem& operator=(const SimpleRenderSystem&) = delete;
-		void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects);
+		void renderGameObjects(VkCommandBuffer command_buffer, std::vector<LveGameObject>& game_objects, const LveCamera& lve_camera);
 	protected:
 
 		void createPipelineLayout();

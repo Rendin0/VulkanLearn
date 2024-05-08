@@ -26,6 +26,11 @@ namespace lve
 		return lve_swap_chain->getRenderPass();
 	}
 
+	float LveRenderer::getAspectRation() const
+	{
+		return lve_swap_chain->extentAspectRatio();;
+	}
+
 	VkCommandBuffer LveRenderer::beginFrame()
 	{
 		assert(!is_frame_started && "Frame is already started");

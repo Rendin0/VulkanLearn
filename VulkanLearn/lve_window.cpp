@@ -52,6 +52,11 @@ namespace lve
 
 	}
 
+	GLFWwindow* LveWindow::getWindowPointer() const
+	{
+		return window;
+	}
+
 	VkExtent2D LveWindow::getExtend()
 	{
 		return { static_cast<uint32_t>(width), static_cast<uint32_t>(height) };
