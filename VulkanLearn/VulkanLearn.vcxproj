@@ -213,19 +213,13 @@
   </CustomBuildStep>
 </ItemDefinitionGroup> -->
   <ItemGroup>
-    <None Include="pushback_render_system.hpp" />
     <None Include="Shaders\simple_shader.frag" />
     <None Include="Shaders\simple_shader.frag.spv" />
     <None Include="Shaders\simple_shader.vert" />
     <None Include="Shaders\simple_shader.vert.spv" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="bounce_render_system.cpp" />
-    <ClCompile Include="color_render_system.cpp" />
-    <ClCompile Include="move_render_system.cpp" />
     <ClCompile Include="first_app.cpp" />
-    <ClCompile Include="gravitation_render_system.cpp" />
-    <ClCompile Include="holding_render_system.cpp" />
     <ClCompile Include="lve_game_object.cpp" />
     <ClCompile Include="lve_model.cpp" />
     <ClCompile Include="lve_pipeline.cpp" />
@@ -234,17 +228,10 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="lve_device.cpp" />
     <ClCompile Include="lve_swap_chain.cpp" />
-    <ClCompile Include="pushback_render_system.cpp" />
-    <ClCompile Include="scale_render_system.cpp" />
     <ClCompile Include="simple_render_system.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="bounce_render_system.hpp" />
-    <ClInclude Include="color_render_system.hpp" />
-    <ClInclude Include="move_render_system.hpp" />
     <ClInclude Include="first_app.hpp" />
-    <ClInclude Include="gravitation_render_system.hpp" />
-    <ClInclude Include="holding_render_system.hpp" />
     <ClInclude Include="lve_game_object.hpp" />
     <ClInclude Include="lve_model.hpp" />
     <ClInclude Include="lve_pipeline.hpp" />
@@ -252,7 +239,6 @@
     <ClInclude Include="lve_window.hpp" />
     <ClInclude Include="lve_device.hpp" />
     <ClInclude Include="lve_swap_chain.hpp" />
-    <ClInclude Include="scale_render_system.hpp" />
     <ClInclude Include="simple_render_system.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -16,10 +16,12 @@ namespace lve
 
 		for (auto& obj : game_objects)
 		{
+			obj.transform.rotation.y = glm::mod(obj.transform.rotation.y + 0.01f, glm::two_pi<float>());
+			obj.transform.rotation.x = glm::mod(obj.transform.rotation.x + 0.01f, glm::two_pi<float>());
+
 			SimplePushConstantData push{};
-			push.offset = obj.transform_2d.translation;
 			push.color = obj.color;
-			push.transform = obj.transform_2d.mat2();
+			push.transform = obj.transform.mat4();
 
 			vkCmdPushConstants(command_buffer, pipeline_layout, VK_SHADER_STAGE_VERTEX_BIT | VK_SHADER_STAGE_FRAGMENT_BIT, 0, sizeof(SimplePushConstantData), &push);
 			obj.model->bind(command_buffer);
@@ -38,50 +40,47 @@ namespace lve
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
 
-	std::unique_ptr<LveModel> SimpleRenderSystem::createTriangleModel(LveDevice& lve_device)
-	{
-		std::vector<LveModel::Vertex> vertices =
-		{
-			{{0.0f, -0.5f}},
-			{{0.5f, 0.5f}},
-			{{-0.5f, 0.5f}}
-		};
-		return std::make_unique<LveModel>(lve_device, vertices);
-	}
+	//std::unique_ptr<LveModel> SimpleRenderSystem::createTriangleModel(LveDevice& lve_device)
+	//{
+	//	std::vector<LveModel::Vertex> vertices =
+	//	{
+	//		{{0.0f, -0.5f}},
+	//		{{0.5f, 0.5f}},
+	//		{{-0.5f, 0.5f}}
+	//	};
+	//	return std::make_unique<LveModel>(lve_device, vertices);
+	//}
 
-	std::unique_ptr<LveModel> SimpleRenderSystem::createSquareModel(LveDevice& lve_device)
-	{
-		std::vector<LveModel::Vertex> vertices =
-		{
-			{{-0.5f, -0.5f}},
-			{{0.5f, 0.5f}},
-			{{-0.5f, 0.5f}},
-			{{-0.5f, -0.5f}},
-			{{0.5f, -0.5f}},
-			{{0.5f, 0.5f}},
-		};
+	//std::unique_ptr<LveModel> SimpleRenderSystem::createSquareModel(LveDevice& lve_device)
+	//{
+	//	std::vector<LveModel::Vertex> vertices =
+	//	{
+	//		{{-0.5f, -0.5f}},
+	//		{{0.5f, 0.5f}},
+	//		{{-0.5f, 0.5f}},
+	//		{{-0.5f, -0.5f}},
+	//		{{0.5f, -0.5f}},
+	//		{{0.5f, 0.5f}},
+	//	};
+	//	return std::make_unique<LveModel>(lve_device, vertices);
+	//}
 
-		return std::make_unique<LveModel>(lve_device, vertices);
-	}
-
-	std::unique_ptr<LveModel> SimpleRenderSystem::createCircleModel(LveDevice& device, unsigned int numSides)
-	{
-		std::vector<LveModel::Vertex> uniqueVertices{};
-		for (int i = 0; i < numSides; i++) {
-			float angle = i * glm::two_pi<float>() / numSides;
-			uniqueVertices.push_back({ {glm::cos(angle), glm::sin(angle)} });
-		}
-		uniqueVertices.push_back({});  // adds center vertex at 0, 0
-
-		std::vector<LveModel::Vertex> vertices{};
-		for (int i = 0; i < numSides; i++) {
-			vertices.push_back(uniqueVertices[i]);
-			vertices.push_back(uniqueVertices[(i + 1) % numSides]);
-			vertices.push_back(uniqueVertices[numSides]);
-		}
-
-		return std::make_unique<LveModel>(device, vertices);
-	}
+	//std::unique_ptr<LveModel> SimpleRenderSystem::createCircleModel(LveDevice& device, unsigned int numSides)
+	//{
+	//	std::vector<LveModel::Vertex> uniqueVertices{};
+	//	for (int i = 0; i < numSides; i++) {
+	//		float angle = i * glm::two_pi<float>() / numSides;
+	//		uniqueVertices.push_back({ {glm::cos(angle), glm::sin(angle)} });
+	//	}
+	//	uniqueVertices.push_back({});  // adds center vertex at 0, 0
+	//	std::vector<LveModel::Vertex> vertices{};
+	//	for (int i = 0; i < numSides; i++) {
+	//		vertices.push_back(uniqueVertices[i]);
+	//		vertices.push_back(uniqueVertices[(i + 1) % numSides]);
+	//		vertices.push_back(uniqueVertices[numSides]);
+	//	}
+	//	return std::make_unique<LveModel>(device, vertices);
+	//}
 
 	void SimpleRenderSystem::createPipelineLayout()
 	{
