@@ -109,7 +109,7 @@ namespace lve
 
 		time_t timer = clock();
 
-		uint32_t fps = 120;
+		uint32_t fps = 60;
 
 		while (!lve_window.shouldClose())
 		{
@@ -129,7 +129,7 @@ namespace lve
 						color_render_system.update(game_objects.begin(), game_objects.end());
 
 						//bounce_render_system.update(game_objects.begin(), game_objects.end());
-						holding_render_system.update(game_objects.begin(), game_objects.end());
+						//holding_render_system.update(game_objects.begin(), game_objects.end());
 					}
 					lve_renderer.beginSwapChainRenderPass(command_buffer);
 					move_render_system.renderGameObjects(command_buffer, game_objects);
