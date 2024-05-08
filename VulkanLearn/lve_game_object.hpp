@@ -59,7 +59,7 @@ namespace lve
 		Transform transform{};
 		std::shared_ptr<LveModel> model{};
 		glm::vec3 color{};
-		glm::vec2 direction{};
+		glm::vec3 direction{0.f};
 
 		float speed{};
 		float mass{};

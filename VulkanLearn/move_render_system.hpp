@@ -9,6 +9,6 @@ namespace lve
 		MoveRenderSystem(LveDevice& device, VkRenderPass render_pass);
 		~MoveRenderSystem();
 
-		void update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end);
+		void update(std::vector<LveGameObject>& game_objects);
 	};
 }

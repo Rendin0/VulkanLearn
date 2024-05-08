@@ -54,23 +54,8 @@
     <None Include="Shaders\simple_shader.vert.spv">
       <Filter>Resource Files\Shaders</Filter>
     </None>
-    <None Include="pushback_render_system.hpp">
-      <Filter>Header Files\Render Systems</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="color_render_system.cpp">
-      <Filter>Source Files\Render Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="dvd_render_system.cpp">
-      <Filter>Source Files\Render Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="follow_render_system.cpp">
-      <Filter>Source Files\Render Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="scale_render_system.cpp">
-      <Filter>Source Files\Render Systems</Filter>
-    </ClCompile>
     <ClCompile Include="simple_render_system.cpp">
       <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
@@ -101,27 +86,30 @@
     <ClCompile Include="lve_model.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="mouse_contorller.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard_movement_controller.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="lve_camera.cpp">
+      <Filter>Source Files\App</Filter>
+    </ClCompile>
+    <ClCompile Include="camera_follow_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
+    </ClCompile>
     <ClCompile Include="pushback_render_system.cpp">
       <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
-    <ClCompile Include="holding_render_system.cpp">
+    <ClCompile Include="move_render_system.cpp">
+      <Filter>Source Files\Render Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="gravitation_render_system.cpp">
       <Filter>Source Files\Render Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="simple_render_system.hpp">
-      <Filter>Header Files\Render Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="scale_render_system.hpp">
-      <Filter>Header Files\Render Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="color_render_system.hpp">
-      <Filter>Header Files\Render Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="dvd_render_system.hpp">
-      <Filter>Header Files\Render Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="follow_render_system.hpp">
       <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
     <ClInclude Include="first_app.hpp">
@@ -148,7 +136,25 @@
     <ClInclude Include="lve_model.hpp">
       <Filter>Header Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="holding_render_system.hpp">
+    <ClInclude Include="keyboard_movement_controller.hpp">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="lve_camera.hpp">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="mouse_contorller.hpp">
+      <Filter>Header Files\App</Filter>
+    </ClInclude>
+    <ClInclude Include="camera_follow_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="pushback_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="move_render_system.hpp">
+      <Filter>Header Files\Render Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="gravitation_render_system.hpp">
       <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
   </ItemGroup>
