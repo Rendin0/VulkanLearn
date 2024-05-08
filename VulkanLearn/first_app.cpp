@@ -42,7 +42,7 @@ namespace lve
 			lve_camera.setViewYXZ(viewer_object.transform.translation, viewer_object.transform.rotation);
 
 			float aspect = lve_renderer.getAspectRation();
-			lve_camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 20.f);
+			lve_camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 200.f);
 
 			if (auto command_buffer = lve_renderer.beginFrame())
 			{
@@ -136,11 +136,17 @@ namespace lve
 
 		auto cube2 = LveGameObject::createGameObject();
 
-		cube2.transform.translation = { 0.f, 0.f, 2.5f };
 		cube2.transform.scale = { .5f, .5f, .5f };
 		cube2.model = cube_model;
 		cube2.transform.translation = { 2.5f, 0.f, 0.f };
 		game_objects.push_back(std::move(cube2));
+
+		auto cube3 = LveGameObject::createGameObject();
+
+		cube3.transform.translation = { 0.f, 0.f, 100.f };
+		cube3.transform.scale = { 30.f, 30.f, 30.f };
+		cube3.model = cube_model;
+		game_objects.push_back(std::move(cube3));
 	}
 
 	void FirstApp::togglePause()

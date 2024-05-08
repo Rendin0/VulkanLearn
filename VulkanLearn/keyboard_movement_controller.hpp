@@ -27,7 +27,7 @@ namespace lve
 		void moveInPlaneXZ(GLFWwindow* window, float dt, LveGameObject& game_object);
 
 		KeyMappings keys{};
-		float move_speed{ 3.f };
+		float move_speed{ 9.f };
 		float look_speed{ 1.5f };
 	};
 

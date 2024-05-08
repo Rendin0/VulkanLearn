@@ -18,6 +18,8 @@ namespace lve
 
 		for (auto& obj : game_objects)
 		{
+			obj.transform.rotation += 0.1f;
+
 			SimplePushConstantData push{};
 			push.color = obj.color;
 			push.transform = projection_view * obj.transform.mat4();
