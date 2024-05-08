@@ -18,7 +18,7 @@ namespace lve
 	class FirstApp
 	{
 	public:
-		static constexpr int WIDTH =  1080;
+		static constexpr int WIDTH =  1920;
 		static constexpr int HEIGHT = 1080;
 
 		void run();
@@ -30,8 +30,6 @@ namespace lve
 		FirstApp(const FirstApp&) = delete;
 		FirstApp& operator=(const FirstApp&) = delete;
 	private:
-		static void keyProcess(GLFWwindow* window, int key, int scancode, int action, int mods);
-		static void mouseProcess(GLFWwindow* window, int button, int action, int mods);
 
 		void loadGameObjects();
 
