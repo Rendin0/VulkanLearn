@@ -10,11 +10,12 @@ namespace lve
 	{
 		vkDestroyPipelineLayout(lve_device.device(), pipeline_layout, nullptr);
 	}
-	void MoveRenderSystem::update(std::vector<LveGameObject>& game_objects)
+	void MoveRenderSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end)
 	{
-		for (auto& object : game_objects)
+		for (auto object = begin; object != end; object++)
 		{
-			object.transform.translation += (object.direction * object.speed);
+			object->transform.translation += (object->direction * object->speed);
+			object->transform.rotation = -object->direction;
 		}
 	}
 }

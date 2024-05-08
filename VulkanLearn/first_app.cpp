@@ -51,15 +51,15 @@ namespace lve
 			lve_camera.setViewYXZ(viewer_object.transform.translation, viewer_object.transform.rotation);
 
 			float aspect = lve_renderer.getAspectRation();
-			lve_camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 200.f);
+			lve_camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 1000.f);
 
 			if (auto command_buffer = lve_renderer.beginFrame())
 			{
 				lve_renderer.beginSwapChainRenderPass(command_buffer);
 				//follow_system.update(game_objects, viewer_object);
 				//pushback_system.update(game_objects, 0.1f);
-				gravity.update(game_objects);
-				move.update(game_objects);
+				gravity.update(game_objects.begin() + 1, game_objects.end());
+				move.update(game_objects.begin() + 1, game_objects.end());
 
 				tmp_system.renderGameObjects(command_buffer, game_objects, lve_camera);
 				lve_renderer.endSwapChainRenderPass(command_buffer);
@@ -68,6 +68,27 @@ namespace lve
 		}
 
 		vkDeviceWaitIdle(lve_device.device());
+	}
+
+
+	std::unique_ptr<LveModel> createFloorModel(LveDevice& device, glm::vec3 offset)
+	{
+		std::vector<LveModel::Vertex> vertices
+		{
+			{{-.5f, .0f, -.5f}, {.25f, .25f, .25f}},
+			{{.5f, .0f, .5f}, {.25f, .25f, .25f}},
+			{{-.5f, .0f, .5f}, {.25f, .25f, .25f}},
+			{{-.5f, .0f, -.5f}, {.25f, .25f, .25f}},
+			{{.5f, .0f, -.5f}, {.25f, .25f, .25f}},
+			{{.5f, .0f, .5f}, {.25f, .25f, .25f}},
+		};
+
+		for (auto& v : vertices)
+		{
+			v.position += offset;
+		}
+
+		return std::make_unique<LveModel>(device, vertices);
 	}
 
 	std::unique_ptr<LveModel> createCubeModel(LveDevice& device, glm::vec3 offset) {
@@ -139,6 +160,13 @@ namespace lve
 	void FirstApp::loadGameObjects()
 	{
 		std::shared_ptr<LveModel> cube_model = createCubeModel(lve_device, glm::vec3{ 0.f });
+		std::shared_ptr<LveModel> floor_model = createFloorModel(lve_device, glm::vec3{ 0.f });
+
+		auto floor = LveGameObject::createGameObject();
+		floor.transform.translation.y += 50.f;
+		floor.transform.scale = { 300.f, 1.f, 300.f };
+		floor.model = floor_model;
+		game_objects.push_back(std::move(floor));
 
 		auto cube = LveGameObject::createGameObject();
 
