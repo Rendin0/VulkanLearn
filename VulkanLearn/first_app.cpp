@@ -53,7 +53,7 @@ namespace lve
 			current_time = new_time;
 
 			camera_controller.moveInPlaneXZ(lve_window.getWindowPointer(), frame_time, viewer_object);
-			//lve_camera.setViewYXZ(viewer_object.transform.translation, viewer_object.transform.rotation);
+			lve_camera.setViewYXZ(viewer_object.transform.translation, viewer_object.transform.rotation);
 
 			float aspect = lve_renderer.getAspectRation();
 			lve_camera.setPerspectiveProjection(glm::radians(50.f), aspect, .1f, 100.f);
@@ -66,6 +66,8 @@ namespace lve
 				lve_renderer.endFrame();
 			}
 		}
+
+		vkDeviceWaitIdle(lve_device.device());
 	}
 
 	std::unique_ptr<LveModel> createCubeModel(LveDevice& device, glm::vec3 offset) {
