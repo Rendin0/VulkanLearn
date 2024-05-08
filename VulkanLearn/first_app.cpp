@@ -128,7 +128,7 @@ namespace lve
 
 		auto cube = LveGameObject::createGameObject();
 
-		cube.transform.translation = { 0.f, 0.f, 2.5f };
+		cube.transform.translation = { -0.5f, 0.f, 0.f };
 		cube.transform.scale = { .5f, .5f, .5f };
 		cube.model = cube_model;
 
@@ -138,15 +138,34 @@ namespace lve
 
 		cube2.transform.scale = { .5f, .5f, .5f };
 		cube2.model = cube_model;
-		cube2.transform.translation = { 2.5f, 0.f, 0.f };
+		cube2.transform.translation = { .5f, 0.f, 0.f };
 		game_objects.push_back(std::move(cube2));
 
 		auto cube3 = LveGameObject::createGameObject();
 
-		cube3.transform.translation = { 0.f, 0.f, 100.f };
-		cube3.transform.scale = { 30.f, 30.f, 30.f };
+		cube3.transform.translation = { 0.f, 0.f, 0.f };
+		cube3.transform.scale = { .5f, .5f, .5f };
 		cube3.model = cube_model;
 		game_objects.push_back(std::move(cube3));
+
+		auto cube4 = LveGameObject::createGameObject();
+		cube4.transform.scale = { .5f, .5f, .5f };
+		cube4.transform.translation = { 0.f, -0.5f, 0.f };
+		cube4.model = cube_model;
+
+		auto cube5 = LveGameObject::createGameObject();
+		cube5.transform.scale = { .5f, .5f, .5f };
+		cube5.transform.translation = { 0.f, -1.f, 0.f };
+		cube5.model = cube_model;
+
+		auto cube6 = LveGameObject::createGameObject();
+		cube6.transform.scale = { .5f, .5f, .5f };
+		cube6.transform.translation = { 0.f, -1.5f, 0.f };
+		cube6.model = cube_model;
+
+		game_objects.push_back(std::move(cube4));
+		game_objects.push_back(std::move(cube5));
+		game_objects.push_back(std::move(cube6));
 	}
 
 	void FirstApp::togglePause()
