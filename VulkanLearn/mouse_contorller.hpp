@@ -11,7 +11,7 @@ namespace lve
 
 
 	private:
-		float look_speed{ .2f };
+		float look_speed{ 2.f };
 
 	};
 }

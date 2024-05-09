@@ -58,8 +58,8 @@ namespace lve
 				lve_renderer.beginSwapChainRenderPass(command_buffer);
 				//follow_system.update(game_objects, viewer_object);
 				//pushback_system.update(game_objects, 0.1f);
-				gravity.update(game_objects.begin() + 1, game_objects.end());
-				move.update(game_objects.begin() + 1, game_objects.end());
+				gravity.update(game_objects.begin() + 1, game_objects.end(), frame_time);
+				move.update(game_objects.begin() + 1, game_objects.end(), frame_time);
 
 				tmp_system.renderGameObjects(command_buffer, game_objects, lve_camera);
 				lve_renderer.endSwapChainRenderPass(command_buffer);

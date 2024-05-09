@@ -20,7 +20,7 @@ namespace lve
 		return vector * force;
 	}
 
-	void GravitationRenderSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end)
+	void GravitationRenderSystem::update(const std::vector<LveGameObject>::iterator& begin, const std::vector<LveGameObject>::iterator& end, float dt)
 	{
 		const double GRAVITY = 6.6742E-2;
 
@@ -33,7 +33,7 @@ namespace lve
 				{
 					continue;
 				}
-				sub_object->direction += gravityVector(object, sub_object, GRAVITY);
+				sub_object->direction += gravityVector(object, sub_object, GRAVITY) * dt * dt_factor;
 
 			}
 		}
