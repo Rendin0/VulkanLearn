@@ -103,10 +103,10 @@ namespace lve
 
 	void FirstApp::loadGameObjects()
 	{
-		std::shared_ptr<LveModel> cube_model = LveModel::createModelFromFile(lve_device, "Models/smooth_vase.obj");
+		std::shared_ptr<LveModel> cube_model = LveModel::createModelFromFile(lve_device, "Models/FinalBaseMesh.obj");
 		
-		glm::vec3 large_scale = { 2.f, 2.f, 2.f };
-		glm::vec3 small_scale = { .75f, .75f, .75f };
+		glm::vec3 large_scale(-.05f);
+		glm::vec3 small_scale (-.025f);
 
 		auto game_object1 = LveGameObject::createGameObject();
 

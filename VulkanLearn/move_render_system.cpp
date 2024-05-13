@@ -15,7 +15,7 @@ namespace lve
 		for (auto object = begin; object != end; object++)
 		{
 			object->transform.translation += (object->direction * object->speed) * dt * dt_factor;
-			object->transform.rotation = -object->direction * dt * dt_factor;
+			object->transform.rotation = -object->direction ;
 		}
 	}
 }
