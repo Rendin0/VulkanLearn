@@ -1,10 +1,14 @@
 #pragma once
 #include "lve_device.hpp"
+
 #include <vector>
+#include <memory>
 
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 #include <GLM/glm.hpp>
+
+
 
 namespace lve
 {
@@ -12,32 +16,51 @@ namespace lve
 	{
 	public:
 
-		struct Vertex {
-			glm::vec3 position;
-			glm::vec3 color;
+		struct Vertex
+		{
+			glm::vec3 position{};
+			glm::vec3 color{};
+			glm::vec3 normal{};
+			glm::vec2 uv{};
 
 			static std::vector<VkVertexInputBindingDescription> getBindingDescriptions();
 			static std::vector<VkVertexInputAttributeDescription> getAttributeDescriptions();
 
-			static std::vector<Vertex> makeSerpinskiStep(const std::vector<Vertex>& vertices);
+			bool operator==(const Vertex& other) const;
 		};
 
-		LveModel(LveDevice& lve_device, const std::vector<Vertex>& vertices);
+		struct Builder
+		{
+			std::vector<Vertex> vertices{};
+			std::vector<uint32_t> indices{};
+
+			void loadModels(const std::string& file_path);
+		};
+
+		LveModel(LveDevice& lve_device, const LveModel::Builder &builder);
 		~LveModel();
 
 		LveModel(const LveModel&) = delete;
 		LveModel& operator=(const LveModel&) = delete;
 
-		void reloadVertices();
+		static std::unique_ptr<LveModel> createModelFromFile(LveDevice& device, const std::string& file_path);
+
 		void bind(VkCommandBuffer buffer);
 		void draw(VkCommandBuffer buffer);
 
 	private:
 		void createVertexBuffer(const std::vector<Vertex>& vertices);
+		void createIndexBuffer(const std::vector<uint32_t>& indices);
 
 		LveDevice& lve_device;
+
 		VkBuffer vertex_buffer;
 		VkDeviceMemory vertex_buffer_memory;
 		uint32_t vertex_count;
+
+		bool has_index_buffer{ false };
+		VkBuffer index_buffer;
+		VkDeviceMemory index_buffer_memory;
+		uint32_t index_count;
 	};
 }

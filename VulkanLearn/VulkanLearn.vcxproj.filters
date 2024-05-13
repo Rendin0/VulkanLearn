@@ -157,5 +157,8 @@
     <ClInclude Include="gravitation_render_system.hpp">
       <Filter>Header Files\Render Systems</Filter>
     </ClInclude>
+    <ClInclude Include="lve_utils.hpp">
+      <Filter>Header Files\Objects</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

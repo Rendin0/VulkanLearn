@@ -15,7 +15,7 @@ namespace lve
 	{
 		glm::vec3 vector = obj1->transform.translation - obj2->transform.translation;
 
-		float force = gravity * ((obj1->mass * obj2->mass) / glm::length(vector));
+		float force = static_cast<float>(gravity) * ((obj1->mass * obj2->mass) / glm::length(vector));
 
 		return vector * force;
 	}

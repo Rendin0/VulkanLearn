@@ -58,8 +58,8 @@ namespace lve
 				lve_renderer.beginSwapChainRenderPass(command_buffer);
 				//follow_system.update(game_objects, viewer_object);
 				//pushback_system.update(game_objects, 0.1f);
-				gravity.update(game_objects.begin() + 1, game_objects.end(), frame_time);
-				move.update(game_objects.begin() + 1, game_objects.end(), frame_time);
+				gravity.update(game_objects.begin(), game_objects.end(), frame_time);
+				move.update(game_objects.begin(), game_objects.end(), frame_time);
 
 				tmp_system.renderGameObjects(command_buffer, game_objects, lve_camera);
 				lve_renderer.endSwapChainRenderPass(command_buffer);
@@ -73,80 +73,24 @@ namespace lve
 
 	std::unique_ptr<LveModel> createFloorModel(LveDevice& device, glm::vec3 offset)
 	{
-		std::vector<LveModel::Vertex> vertices
+		LveModel::Builder builder{};
+
+		builder.vertices =
 		{
 			{{-.5f, .0f, -.5f}, {.25f, .25f, .25f}},
 			{{.5f, .0f, .5f}, {.25f, .25f, .25f}},
 			{{-.5f, .0f, .5f}, {.25f, .25f, .25f}},
-			{{-.5f, .0f, -.5f}, {.25f, .25f, .25f}},
 			{{.5f, .0f, -.5f}, {.25f, .25f, .25f}},
-			{{.5f, .0f, .5f}, {.25f, .25f, .25f}},
 		};
 
-		for (auto& v : vertices)
+		builder.indices = { 0, 1, 2, 0, 3, 1 };
+
+		for (auto& v : builder.vertices)
 		{
 			v.position += offset;
 		}
 
-		return std::make_unique<LveModel>(device, vertices);
-	}
-
-	std::unique_ptr<LveModel> createCubeModel(LveDevice& device, glm::vec3 offset) {
-		std::vector<LveModel::Vertex> vertices{
-
-			// left face (white)
-			{{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
-			{{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
-			{{-.5f, -.5f, .5f}, {.9f, .9f, .9f}},
-			{{-.5f, -.5f, -.5f}, {.9f, .9f, .9f}},
-			{{-.5f, .5f, -.5f}, {.9f, .9f, .9f}},
-			{{-.5f, .5f, .5f}, {.9f, .9f, .9f}},
-
-			// right face (yellow)
-			{{.5f, -.5f, -.5f}, {.8f, .8f, .7f}},
-			{{.5f, .5f, .5f}, {.8f, .8f, .1f}},
-			{{.5f, -.5f, .5f}, {.8f, .1f, .4f}},
-			{{.5f, -.5f, -.5f}, {.8f, .1f, .7f}},
-			{{.5f, .5f, -.5f}, {.4f, .1f, .1f}},
-			{{.5f, .5f, .5f}, {.8f, .8f, .1f}},
-
-			// top face (orange, remember y axis points down)
-			{{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
-			{{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
-			{{-.5f, -.5f, .5f}, {.9f, .6f, .1f}},
-			{{-.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
-			{{.5f, -.5f, -.5f}, {.9f, .6f, .1f}},
-			{{.5f, -.5f, .5f}, {.9f, .6f, .1f}},
-
-			// bottom face (red)
-			{{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
-			{{.5f, .5f, .5f}, {.8f, .1f, .1f}},
-			{{-.5f, .5f, .5f}, {.8f, .1f, .1f}},
-			{{-.5f, .5f, -.5f}, {.8f, .1f, .1f}},
-			{{.5f, .5f, -.5f}, {.8f, .1f, .1f}},
-			{{.5f, .5f, .5f}, {.8f, .1f, .1f}},
-
-			// nose face (blue)
-			{{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
-			{{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
-			{{-.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
-			{{-.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
-			{{.5f, -.5f, 0.5f}, {.1f, .1f, .8f}},
-			{{.5f, .5f, 0.5f}, {.1f, .1f, .8f}},
-
-			// tail face (green)
-			{{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
-			{{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
-			{{-.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
-			{{-.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
-			{{.5f, -.5f, -0.5f}, {.1f, .8f, .1f}},
-			{{.5f, .5f, -0.5f}, {.1f, .8f, .1f}},
-
-		};
-		for (auto& v : vertices) {
-			v.position += offset;
-		}
-		return std::make_unique<LveModel>(device, vertices);
+		return std::make_unique<LveModel>(device, builder);
 	}
 
 	FirstApp::FirstApp()
@@ -159,60 +103,56 @@ namespace lve
 
 	void FirstApp::loadGameObjects()
 	{
-		std::shared_ptr<LveModel> cube_model = createCubeModel(lve_device, glm::vec3{ 0.f });
-		std::shared_ptr<LveModel> floor_model = createFloorModel(lve_device, glm::vec3{ 0.f });
+		std::shared_ptr<LveModel> cube_model = LveModel::createModelFromFile(lve_device, "Models/smooth_vase.obj");
+		
+		glm::vec3 large_scale = { 2.f, 2.f, 2.f };
+		glm::vec3 small_scale = { .75f, .75f, .75f };
 
-		auto floor = LveGameObject::createGameObject();
-		floor.transform.translation.y += 50.f;
-		floor.transform.scale = { 300.f, 1.f, 300.f };
-		floor.model = floor_model;
-		game_objects.push_back(std::move(floor));
+		auto game_object1 = LveGameObject::createGameObject();
 
-		auto cube = LveGameObject::createGameObject();
-
-		cube.transform.translation = { -2.5f, 10.f, -2.5f };
-		cube.transform.scale = { .25f, .25f, .25f };
-		cube.model = cube_model;
-		cube.mass = 1.f;
-		cube.speed = 0.1f / cube.mass;
-		game_objects.push_back(std::move(cube));
+		game_object1.transform.translation = { -2.5f, 10.f, -2.5f };
+		game_object1.transform.scale = large_scale;
+		game_object1.model = cube_model;
+		game_object1.mass = 1.f;
+		game_object1.speed = 0.1f / game_object1.mass;
+		game_objects.push_back(std::move(game_object1));
 
 
-		auto cube2 = LveGameObject::createGameObject();
+		auto game_object2 = LveGameObject::createGameObject();
 
-		cube2.transform.scale = { .25f, .25f, .25f };
-		cube2.model = cube_model;
-		cube2.transform.translation = { -2.5f, -1.f, 0.f };
-		cube2.mass = 1.f;
-		cube2.speed = 0.1f / cube2.mass;
-		game_objects.push_back(std::move(cube2));
+		game_object2.transform.scale = large_scale;
+		game_object2.model = cube_model;
+		game_object2.transform.translation = { -2.5f, -1.f, 0.f };
+		game_object2.mass = 1.f;
+		game_object2.speed = 0.1f / game_object2.mass;
+		game_objects.push_back(std::move(game_object2));
 
-		auto cube3 = LveGameObject::createGameObject();
+		auto game_object3 = LveGameObject::createGameObject();
 
-		cube3.transform.scale = { .25f, .25f, .25f };
-		cube3.model = cube_model;
-		cube3.transform.translation = { 2.25f, -1.f, 2.25f };
-		cube3.mass = 1.f;
-		cube3.speed = 0.1f / cube3.mass;
-		game_objects.push_back(std::move(cube3));
+		game_object3.transform.scale = large_scale;
+		game_object3.model = cube_model;
+		game_object3.transform.translation = { 2.25f, -1.f, 2.25f };
+		game_object3.mass = 1.f;
+		game_object3.speed = 0.1f / game_object3.mass;
+		game_objects.push_back(std::move(game_object3));
 
-		auto cube4 = LveGameObject::createGameObject();
+		auto game_object4 = LveGameObject::createGameObject();
 
-		cube4.transform.scale = { .125f, .125f, .125f };
-		cube4.model = cube_model;
-		cube4.transform.translation = { 3.25f, -5.f, 3.25f };
-		cube4.mass = .1f;
-		cube4.speed = 0.1f / cube4.mass;
-		game_objects.push_back(std::move(cube4));
+		game_object4.transform.scale = small_scale;
+		game_object4.model = cube_model;
+		game_object4.transform.translation = { 3.25f, -5.f, 3.25f };
+		game_object4.mass = .1f;
+		game_object4.speed = 0.1f / game_object4.mass;
+		game_objects.push_back(std::move(game_object4));
 
-		auto cube5 = LveGameObject::createGameObject();
+		auto game_object5 = LveGameObject::createGameObject();
 
-		cube5.transform.scale = { .125f, .125f, .125f };
-		cube5.model = cube_model;
-		cube5.transform.translation = { 4.25f, 5.f, 4.25f };
-		cube5.mass = .1f;
-		cube5.speed = 0.1f / cube5.mass;
-		game_objects.push_back(std::move(cube5));
+		game_object5.transform.scale = small_scale;
+		game_object5.model = cube_model;
+		game_object5.transform.translation = { 4.25f, 5.f, 4.25f };
+		game_object5.mass = .1f;
+		game_object5.speed = 0.1f / game_object5.mass;
+		game_objects.push_back(std::move(game_object5));
 
 		}
 

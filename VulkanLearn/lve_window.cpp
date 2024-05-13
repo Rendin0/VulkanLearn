@@ -76,6 +76,7 @@ namespace lve
 		glfwInit();
 		glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE);
+		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
 
 		window = glfwCreateWindow(width, height, window_name.c_str(), nullptr, nullptr);
 		setWindowUserPointer(this);
