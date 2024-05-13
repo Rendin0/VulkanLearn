@@ -17,6 +17,7 @@ namespace lve
 			int move_back = GLFW_KEY_S;
 			int move_up = GLFW_KEY_SPACE;
 			int move_down = GLFW_KEY_LEFT_SHIFT;
+			int speed_boost = GLFW_KEY_LEFT_CONTROL;
 
 			int look_up = GLFW_KEY_UP;
 			int look_down = GLFW_KEY_DOWN;

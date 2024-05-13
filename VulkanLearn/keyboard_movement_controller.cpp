@@ -33,6 +33,9 @@ namespace lve
 		if (glfwGetKey(window, keys.move_up) == GLFW_PRESS) move_dir += up_dir;
 		if (glfwGetKey(window, keys.move_down) == GLFW_PRESS) move_dir -= up_dir;
 
+		if (glfwGetKey(window, keys.speed_boost) == GLFW_PRESS) move_speed = 28;
+		if (glfwGetKey(window, keys.speed_boost) == GLFW_RELEASE) move_speed = 9;
+
 		if (glm::dot(move_dir, move_dir) > std::numeric_limits<float>::epsilon())
 		{
 			game_object.transform.translation += move_speed * dt * glm::normalize(move_dir);
