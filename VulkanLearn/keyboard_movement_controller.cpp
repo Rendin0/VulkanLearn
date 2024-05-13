@@ -3,7 +3,7 @@
 
 namespace lve
 {
-	void KeyboardMovementController::moveInPlaneXZ(GLFWwindow* window, float dt, LveGameObject& game_object)
+	void KeyboardMovementController::keyboardController(GLFWwindow* window, float dt, LveGameObject& game_object, bool& paused)
 	{
 		glm::vec3 rotate{ 0.f };
 		if (glfwGetKey(window, keys.look_right) == GLFW_PRESS) rotate.y += 1.f;
@@ -35,6 +35,8 @@ namespace lve
 
 		if (glfwGetKey(window, keys.speed_boost) == GLFW_PRESS) move_speed = 28;
 		if (glfwGetKey(window, keys.speed_boost) == GLFW_RELEASE) move_speed = 9;
+
+		if (glfwGetKey(window, keys.pause_button) == GLFW_PRESS) paused = !paused;
 
 		if (glm::dot(move_dir, move_dir) > std::numeric_limits<float>::epsilon())
 		{

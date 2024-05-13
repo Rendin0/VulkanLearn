@@ -46,8 +46,10 @@ namespace lve
 	{
 	public:
 		using id_t = unsigned int;
+		static id_t current_id;
 
 		static LveGameObject createGameObject();
+		static LveGameObject createGameObject(const LveGameObject& ref);
 
 		id_t getId() const { return id; }
 
@@ -66,6 +68,7 @@ namespace lve
 
 	private:
 		LveGameObject(id_t obj_id);
+		LveGameObject(id_t obj_id, const LveGameObject& ref);
 
 		id_t id;
 	};

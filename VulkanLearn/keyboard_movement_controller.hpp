@@ -23,9 +23,11 @@ namespace lve
 			int look_down = GLFW_KEY_DOWN;
 			int look_right = GLFW_KEY_RIGHT;
 			int look_left = GLFW_KEY_LEFT;
+
+			int pause_button = GLFW_KEY_P;
 		};
 
-		void moveInPlaneXZ(GLFWwindow* window, float dt, LveGameObject& game_object);
+		void keyboardController(GLFWwindow* window, float dt, LveGameObject& game_object, bool& paused);
 
 		KeyMappings keys{};
 		float move_speed{ 9.f };

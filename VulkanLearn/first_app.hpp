@@ -25,7 +25,7 @@ namespace lve
 		LveWindow* lveWindow();
 
 		FirstApp();
-		~FirstApp();
+		~FirstApp() = default;
 
 		FirstApp(const FirstApp&) = delete;
 		FirstApp& operator=(const FirstApp&) = delete;
