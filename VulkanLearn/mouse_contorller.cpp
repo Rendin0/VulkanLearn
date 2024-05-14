@@ -1,6 +1,5 @@
 #include "mouse_contorller.hpp"
 #include <limits>
-#include <iostream>
 
 namespace lve
 {
@@ -8,12 +7,16 @@ namespace lve
 	{
 		glm::vec3 rotate{ 0.f };
 
-		double x, y;
-		glfwGetCursorPos(window, &y, &x);
+		double dx, dy;
+		glfwGetCursorPos(window, &dy, &dx);
+
+
+		float x = glm::clamp(static_cast<float>(dx), -400.f, 400.f);
+		float y = glm::clamp(static_cast<float>(dy), -400.f, 400.f);
 
 		rotate.x = -(static_cast<float>(x));
 		rotate.y = (static_cast<float>(y));
-
+		
 		glfwSetCursorPos(window, 0, 0);
 		
 		if (glm::dot(rotate, rotate) > std::numeric_limits<float>::epsilon())
