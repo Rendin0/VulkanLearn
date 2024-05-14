@@ -8,6 +8,7 @@
 #include "pushback_render_system.hpp"
 #include "gravitation_render_system.hpp"
 #include "move_render_system.hpp"
+#include "color_render_system.hpp"
 
 #include <stdexcept>
 #include <array>
@@ -25,6 +26,7 @@ namespace lve
 		PushbackRenderSystem pushback_system(lve_device, lve_renderer.getSwapChainRenderPass());
 		GravitationRenderSystem gravity(lve_device, lve_renderer.getSwapChainRenderPass());
 		MoveRenderSystem move(lve_device, lve_renderer.getSwapChainRenderPass());
+		ColorRenderSystem rainbow(lve_device, lve_renderer.getSwapChainRenderPass());
 
 		bool paused = false;
 
@@ -65,6 +67,7 @@ namespace lve
 					//pushback_system.update(game_objects, 0.1f);
 					gravity.update(game_objects.begin() + 1, game_objects.end(), frame_time);
 					move.update(game_objects.begin() + 1, game_objects.end(), frame_time);
+					rainbow.update(game_objects.begin() + 1, game_objects.end());
 				}
 
 				render_system.renderGameObjects(command_buffer, game_objects, lve_camera);

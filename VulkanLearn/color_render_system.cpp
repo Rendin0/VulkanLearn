@@ -18,9 +18,9 @@ namespace lve
 		
 		for (auto object = begin; object != end; object++)
 		{
-			object->color.r = (object->transform_2d.translation.x + 1) / 2;
-			//object->color.g = (object->transform_2d.translation.x + 1) / 2;
-			object->color.b = (object->transform_2d.translation.y + 1) / 2;
+			object->color.r = (object->transform.translation.x + 1) / 2;
+			object->color.g = (object->transform.translation.y + 1) / 2;
+			object->color.b = (object->transform.translation.z + 1) / 2;
 		}
 	}
 
